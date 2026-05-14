@@ -62,7 +62,7 @@ export default function SIPCalcPage() {
             <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-8">Estimated Growth</h3>
             <div className="h-72">
               {mounted && (
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                   <AreaChart data={chartData}>
                     <defs>
                       <linearGradient id="sipInv" x1="0" y1="0" x2="0" y2="1">
@@ -90,7 +90,7 @@ export default function SIPCalcPage() {
           <div className="grid md:grid-cols-2 gap-8 items-center bg-slate-50 rounded-3xl p-8 border border-slate-100">
             <div className="h-52 relative">
               {mounted && (
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                   <PieChart>
                     <Pie data={pieData} cx="50%" cy="50%" innerRadius={50} outerRadius={70} paddingAngle={5} dataKey="value">
                       {pieData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}

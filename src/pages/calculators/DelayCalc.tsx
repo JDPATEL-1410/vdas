@@ -92,7 +92,7 @@ export default function DelayCalcPage() {
             </p>
           </div>
           <div className="bg-slate-50 rounded-3xl p-6 border border-slate-100 h-56">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <BarChart data={chartData} barSize={60}>
                 <XAxis dataKey="name" tick={{ fontSize: 11, fontWeight: 700 }} axisLine={false} tickLine={false} />
                 <YAxis tickFormatter={v => formatINR(v).replace('₹', '')} tick={{ fontSize: 10, fill: '#94a3b8' }} axisLine={false} tickLine={false} />

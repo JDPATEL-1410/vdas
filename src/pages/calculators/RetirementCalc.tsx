@@ -84,7 +84,7 @@ export default function RetirementCalcPage() {
           <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100">
             <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-8">Wealth Accumulation Path</h3>
             <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <AreaChart data={chartData}>
                   <defs>
                     <linearGradient id="colorRet" x1="0" y1="0" x2="0" y2="1">
@@ -106,7 +106,7 @@ export default function RetirementCalcPage() {
              <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 flex flex-col items-center">
                 <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Corpus Breakdown</h4>
                 <div className="h-40 w-full relative">
-                  <ResponsiveContainer width="100%" height="100%">
+                      <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                     <PieChart>
                       <Pie data={pieData} cx="50%" cy="50%" innerRadius={40} outerRadius={60} paddingAngle={5} dataKey="value">
                         {pieData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}

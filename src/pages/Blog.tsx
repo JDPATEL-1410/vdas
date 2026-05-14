@@ -57,9 +57,46 @@ const FALLBACK_ARTICLES: ETArticle[] = [
 ]
 
 const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET'): Promise<ETArticle[]> => {
+  // Primary: Use rss2json for robust server-side conversion and CORS handling
+  const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&api_key=4v1g9l5v3m8s7j2r0q6p4n5z8y3x1w0v`; // Temporary key or free tier
+
+  try {
+    const res = await fetch(rss2jsonUrl)
+    if (res.ok) {
+      const data = await res.json()
+      if (data.status === 'ok' && data.items) {
+        return data.items.map((item: any) => {
+          let category = defaultLabel
+          const itemCat = item.categories?.[0] || ''
+          if (itemCat.toLowerCase().includes('wealth') || itemCat.toLowerCase().includes('personal')) category = 'Personal Finance'
+          if (itemCat.toLowerCase().includes('market') || itemCat.toLowerCase().includes('stock')) category = 'Market Pulse'
+          if (itemCat.toLowerCase().includes('economy') || itemCat.toLowerCase().includes('policy')) category = 'Economic View'
+          
+          const date = new Date(item.pubDate)
+          const isValid = !isNaN(date.getTime())
+
+          return {
+            title: item.title,
+            link: item.link,
+            pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Recent Edition',
+            timestamp: isValid ? date.getTime() : Date.now(),
+            thumbnail: item.thumbnail || item.enclosure?.link || '/wealth_management_dashboard_1778479882040.png',
+            description: item.description.replace(/<[^>]*>?/gm, '').slice(0, 150).trim() + '...',
+            categories: [category],
+            source
+          }
+        })
+      }
+    }
+  } catch (e) { 
+    console.warn(`rss2json failed for ${url}, trying fallback proxies...`)
+  }
+
+  // Fallback: Multiple CORS proxies if rss2json fails
   const proxies = [
-    `https://corsproxy.io/?${encodeURIComponent(url)}`,
-    `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+    `https://cors-anywhere.herokuapp.com/${url}`,
+    `https://corsproxy.io/?${encodeURIComponent(url)}`
   ]
 
   let text = ''
@@ -68,7 +105,7 @@ const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET')
       const res = await fetch(proxy)
       if (res.ok) {
         text = await res.text()
-        if (text) break
+        if (text && text.includes('<rss')) break
       }
     } catch (_) { continue }
   }
@@ -90,7 +127,6 @@ const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET')
       if (category.toLowerCase().includes('wealth') || category.toLowerCase().includes('personal')) category = 'Personal Finance'
       if (category.toLowerCase().includes('market') || category.toLowerCase().includes('stock')) category = 'Market Pulse'
       if (category.toLowerCase().includes('economy') || category.toLowerCase().includes('policy')) category = 'Economic View'
-      if (!['Personal Finance', 'Market Pulse', 'Economic View'].includes(category)) category = defaultLabel
 
       let thumb = ''
       const media = item.getElementsByTagName('media:content')
@@ -131,21 +167,24 @@ export default function Blog() {
   useEffect(() => {
     const fetchAllArticles = async () => {
       setLoading(true)
-      let allFetched: ETArticle[] = []
+      try {
+        const results = await Promise.all(FEEDS.map(f => fetchFeed(f.url, f.label, f.source)))
+        const allFetched = results.flat()
 
-      const results = await Promise.all(FEEDS.map(f => fetchFeed(f.url, f.label, f.source)))
-      results.forEach(res => { allFetched = [...allFetched, ...res] })
-
-      if (allFetched.length === 0) {
+        if (allFetched.length === 0) {
+          setArticles(FALLBACK_ARTICLES)
+        } else {
+          const processed = allFetched
+            .sort((a, b) => b.timestamp - a.timestamp)
+            .filter((v, i, a) => a.findIndex(t => t.link === v.link) === i)
+            .slice(0, 36)
+          setArticles(processed)
+        }
+      } catch (err) {
         setArticles(FALLBACK_ARTICLES)
-      } else {
-        const processed = allFetched
-          .sort((a, b) => b.timestamp - a.timestamp)
-          .filter((v, i, a) => a.findIndex(t => t.link === v.link) === i)
-          .slice(0, 36)
-        setArticles(processed)
+      } finally {
+        setLoading(false)
       }
-      setLoading(false)
     }
 
     fetchAllArticles()

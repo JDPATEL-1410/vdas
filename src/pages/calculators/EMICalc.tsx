@@ -54,7 +54,7 @@ export default function EMICalcPage() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               {/* Chart Container */}
               <div className="h-64 relative">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                   <PieChart>
                     <Pie
                       data={chartData}

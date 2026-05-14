@@ -29,67 +29,92 @@ export default function LatestInsights() {
         let allFetched: Article[] = []
         
         const fetchAndParse = async (url: string, defaultLabel: string, source: string) => {
+          // Primary: rss2json
+          const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&api_key=4v1g9l5v3m8s7j2r0q6p4n5z8y3x1w0v`;
+          
           try {
-            // Use multiple proxies for Vercel stability
-            const proxies = [
-              `https://corsproxy.io/?${encodeURIComponent(url)}`,
-              `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
-            ]
-            
-            let text = ""
-            for (const proxy of proxies) {
-              try {
-                const response = await fetch(proxy)
-                if (response.ok) {
-                  text = await response.text()
-                  if (text) break
-                }
-              } catch (e) { continue }
+            const res = await fetch(rss2jsonUrl)
+            if (res.ok) {
+              const data = await res.json()
+              if (data.status === 'ok' && data.items) {
+                return data.items.map((item: any) => {
+                  const date = new Date(item.pubDate)
+                  const isValid = !isNaN(date.getTime())
+                  return {
+                    title: item.title,
+                    link: item.link,
+                    pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : 'Recent',
+                    timestamp: isValid ? date.getTime() : Date.now(),
+                    thumbnail: item.thumbnail || item.enclosure?.link || "/wealth_management_dashboard_1778479882040.png",
+                    category: defaultLabel,
+                    source
+                  }
+                })
+              }
             }
+          } catch (e) {
+            console.warn(`rss2json failed for ${url} in LatestInsights`)
+          }
+
+          // Fallback: CORS proxies
+          const proxies = [
+            `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+            `https://corsproxy.io/?${encodeURIComponent(url)}`
+          ]
+          
+          let text = ""
+          for (const proxy of proxies) {
+            try {
+              const response = await fetch(proxy)
+              if (response.ok) {
+                text = await response.text()
+                if (text && text.includes('<rss')) break
+              }
+            } catch (e) { continue }
+          }
+          
+          if (text) {
+            const parser = new DOMParser()
+            const xmlDoc = parser.parseFromString(text, "text/xml")
+            const items = xmlDoc.querySelectorAll("item")
             
-            if (text) {
-              const parser = new DOMParser()
-              const xmlDoc = parser.parseFromString(text, "text/xml")
-              const items = xmlDoc.querySelectorAll("item")
+            return Array.from(items).map(item => {
+              const title = item.querySelector("title")?.textContent || ""
+              const link = item.querySelector("link")?.textContent || ""
+              const pubDate = item.querySelector("pubDate")?.textContent || ""
+              const desc = item.querySelector("description")?.textContent || ""
               
-              return Array.from(items).map(item => {
-                const title = item.querySelector("title")?.textContent || ""
-                const link = item.querySelector("link")?.textContent || ""
-                const pubDate = item.querySelector("pubDate")?.textContent || ""
-                const desc = item.querySelector("description")?.textContent || ""
-                
-                let thumb = ""
-                const media = item.getElementsByTagName("media:content")
-                if (media.length > 0) thumb = media[0].getAttribute("url") || ""
-                if (!thumb) {
-                  const enclosure = item.querySelector("enclosure")
-                  if (enclosure) thumb = enclosure.getAttribute("url") || ""
-                }
-                if (!thumb) {
-                  const imgMatch = desc.match(/<img[^>]+src="([^">]+)"/)
-                  if (imgMatch) thumb = imgMatch[1]
-                }
+              let thumb = ""
+              const media = item.getElementsByTagName("media:content")
+              if (media.length > 0) thumb = media[0].getAttribute("url") || ""
+              if (!thumb) {
+                const enclosure = item.querySelector("enclosure")
+                if (enclosure) thumb = enclosure.getAttribute("url") || ""
+              }
+              if (!thumb) {
+                const imgMatch = desc.match(/<img[^>]+src="([^">]+)"/)
+                if (imgMatch) thumb = imgMatch[1]
+              }
 
-                const date = new Date(pubDate)
-                const isValid = !isNaN(date.getTime())
+              const date = new Date(pubDate)
+              const isValid = !isNaN(date.getTime())
 
-                return {
-                  title,
-                  link,
-                  pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : 'Recent',
-                  timestamp: isValid ? date.getTime() : Date.now(),
-                  thumbnail: thumb || "/wealth_management_dashboard_1778479882040.png",
-                  category: defaultLabel,
-                  source
-                }
-              })
-            }
-          } catch (e) { return [] }
+              return {
+                title,
+                link,
+                pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : 'Recent',
+                timestamp: isValid ? date.getTime() : Date.now(),
+                thumbnail: thumb || "/wealth_management_dashboard_1778479882040.png",
+                category: defaultLabel,
+                source
+              }
+            })
+          }
           return []
         }
 
         const results = await Promise.all(FEEDS.map(f => fetchAndParse(f.url, f.label, f.source)))
-        results.forEach(res => { allFetched = [...allFetched, ...res] })
+        allFetched = results.flat()
 
         const processed = allFetched
           .sort((a, b) => b.timestamp - a.timestamp)

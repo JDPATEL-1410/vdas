@@ -90,7 +90,7 @@ export default function SIPWidget() {
             <div className="p-12 lg:p-20 flex flex-col justify-center items-center text-center bg-white">
               <div className="w-full h-64 mb-12">
                 {mounted && (
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                     <PieChart>
                       <Pie
                         data={data}
