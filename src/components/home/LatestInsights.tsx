@@ -30,9 +30,22 @@ export default function LatestInsights() {
         
         const fetchAndParse = async (url: string, defaultLabel: string, source: string) => {
           try {
-            const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`
-            const response = await fetch(proxyUrl)
-            const text = await response.text()
+            // Use multiple proxies for Vercel stability
+            const proxies = [
+              `https://corsproxy.io/?${encodeURIComponent(url)}`,
+              `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
+            ]
+            
+            let text = ""
+            for (const proxy of proxies) {
+              try {
+                const response = await fetch(proxy)
+                if (response.ok) {
+                  text = await response.text()
+                  if (text) break
+                }
+              } catch (e) { continue }
+            }
             
             if (text) {
               const parser = new DOMParser()
@@ -57,20 +70,21 @@ export default function LatestInsights() {
                   if (imgMatch) thumb = imgMatch[1]
                 }
 
+                const date = new Date(pubDate)
+                const isValid = !isNaN(date.getTime())
+
                 return {
                   title,
                   link,
-                  pubDate: new Date(pubDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
-                  timestamp: new Date(pubDate).getTime() || Date.now(),
+                  pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : 'Recent',
+                  timestamp: isValid ? date.getTime() : Date.now(),
                   thumbnail: thumb || "/wealth_management_dashboard_1778479882040.png",
                   category: defaultLabel,
                   source
                 }
               })
             }
-          } catch (e) {
-            return []
-          }
+          } catch (e) { return [] }
           return []
         }
 
@@ -166,7 +180,7 @@ export default function LatestInsights() {
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{article.pubDate}</span>
                 </div>
 
-                <h3 className="text-xl lg:text-2xl font-black text-slate-900 mb-6 leading-tight group-hover:text-vdas-blue transition-colors font-heading tracking-tight line-clamp-2">
+                <h3 className="text-xl lg:text-2xl font-black text-slate-900 mb-6 leading-tight group-hover:text-vdas-blue transition-colors font-heading tracking-tighter line-clamp-2">
                   <a href={article.link} target="_blank" rel="noopener noreferrer">{article.title}</a>
                 </h3>
 

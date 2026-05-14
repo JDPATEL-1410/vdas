@@ -48,11 +48,25 @@ export default function Blog() {
       setLoading(true)
       let allFetched: ETArticle[] = []
 
-      const fetchAndParse = async (url: string, defaultLabel: string, source: 'NJ' | 'ET') => {
-        try {
-          const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`
-          const response = await fetch(proxyUrl)
-          const text = await response.text()
+          try {
+            // Use multiple proxies for maximum reliability on Vercel
+            const proxies = [
+              `https://corsproxy.io/?${encodeURIComponent(url)}`,
+              `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
+            ]
+            
+            let response = null
+            let text = ""
+            
+            for (const proxy of proxies) {
+              try {
+                response = await fetch(proxy)
+                if (response.ok) {
+                  text = await response.text()
+                  if (text) break
+                }
+              } catch (e) { continue }
+            }
           
           if (text) {
             const parser = new DOMParser()
@@ -83,11 +97,14 @@ export default function Blog() {
                 if (imgMatch) thumb = imgMatch[1]
               }
 
+              const date = new Date(pubDate)
+              const isValidDate = !isNaN(date.getTime())
+
               return {
                 title,
                 link,
-                pubDate: new Date(pubDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }),
-                timestamp: new Date(pubDate).getTime() || Date.now(),
+                pubDate: isValidDate ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Recent Edition',
+                timestamp: isValidDate ? date.getTime() : Date.now(),
                 thumbnail: thumb || "/wealth_management_dashboard_1778479882040.png",
                 description: desc.replace(/<[^>]*>?/gm, '').slice(0, 150).trim() + '...',
                 categories: [category],
