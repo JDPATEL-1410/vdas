@@ -10,8 +10,9 @@
   --color-vdas-white: #ffffff;
   --color-vdas-slate: #1a1a1a;
   
-  --font-heading: 'Outfit', 'Inter', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-display: 'Instrument Serif', serif;
   
   --shadow-premium: 0 20px 40px -15px rgba(0, 86, 179, 0.1);
   --shadow-orange: 0 20px 40px -15px rgba(255, 107, 0, 0.2);
@@ -37,6 +38,8 @@ body {
   color: #334155;
   margin: 0;
   padding: 0;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -44,8 +47,19 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   color: #0f172a;
+  font-weight: 700;
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.75rem; }
+h3 { font-size: 2rem; }
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 /* Premium Utilities */

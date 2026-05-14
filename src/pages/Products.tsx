@@ -33,8 +33,8 @@ export default function Products() {
       <section className="py-32 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-black text-slate-900 mb-6 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-              The <span className="text-vdas-royal">VDAS Advantage.</span>
+            <h2 className="text-4xl sm:text-5xl font-black text-slate-900 mb-6 tracking-tighter font-display">
+              The <span className="text-vdas-blue italic">VDAS Advantage.</span>
             </h2>
             <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium">
               Professional guidance and disciplined planning to help you achieve your financial milestones.
@@ -54,10 +54,10 @@ export default function Products() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-xl group hover:border-vdas-royal/20 transition-all"
+                className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_15px_50px_-15px_rgba(0,0,0,0.05)] group hover:border-vdas-blue/20 transition-all duration-500 hover:-translate-y-2"
               >
-                <div className="text-4xl mb-8 group-hover:scale-110 transition-transform">{item.icon}</div>
-                <h3 className="text-xl font-black text-slate-900 mb-4 tracking-tight uppercase">{item.title}</h3>
+                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 group-hover:bg-vdas-blue/10 transition-all duration-500">{item.icon}</div>
+                <h3 className="text-lg font-black text-slate-900 mb-4 tracking-tight uppercase font-heading">{item.title}</h3>
                 <p className="text-slate-500 text-sm font-medium leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}

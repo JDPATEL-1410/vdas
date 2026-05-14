@@ -46,11 +46,11 @@ export default function Services() {
               <div key={p.step} className="relative">
                 <div className="text-6xl font-black text-slate-100 absolute -top-10 left-0 -z-0">{p.step}</div>
                 <div className="relative z-10">
-                  <div className="w-12 h-12 bg-vdas-royal text-white rounded-xl flex items-center justify-center font-black mb-6 shadow-lg">
+                  <div className="w-12 h-12 bg-vdas-blue text-white rounded-xl flex items-center justify-center font-black mb-6 shadow-lg shadow-vdas-blue/20">
                     {p.step}
                   </div>
-                  <h3 className="text-slate-900 font-black text-lg mb-3 tracking-tight">{p.title}</h3>
-                  <p className="text-slate-500 text-xs font-medium leading-relaxed">{p.desc}</p>
+                  <h3 className="text-slate-900 font-black text-xl mb-3 tracking-tight font-heading">{p.title}</h3>
+                  <p className="text-slate-500 text-sm font-medium leading-relaxed">{p.desc}</p>
                 </div>
               </div>
             ))}
@@ -63,9 +63,9 @@ export default function Services() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
-              <h2 className="text-4xl sm:text-5xl font-black text-slate-900 mb-12 tracking-tight leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+              <h2 className="text-4xl sm:text-5xl font-black text-slate-900 mb-12 tracking-tighter leading-tight font-display">
                 The Value of <br />
-                <span className="text-vdas-royal">Professional</span> Advice.
+                <span className="text-vdas-blue italic">Professional</span> Advice.
               </h2>
               <div className="space-y-10">
                 {[

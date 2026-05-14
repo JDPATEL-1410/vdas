@@ -61,9 +61,9 @@ export default function About() {
               >
                 Leadership & Excellence
               </motion.div>
-              <h2 className="text-4xl sm:text-6xl font-black text-vdas-blue-dark mb-10 tracking-tighter leading-tight">
+              <h2 className="text-4xl sm:text-6xl font-black text-vdas-blue-dark mb-10 tracking-tighter leading-tight font-display">
                 33 Years of <br />
-                <span className="text-vdas-orange">Financial Integrity.</span>
+                <span className="text-vdas-orange italic">Financial Integrity.</span>
               </h2>
               <p className="text-slate-500 text-xl font-medium leading-relaxed mb-10">
                 For over three decades, VDAS has been a trusted partner for families seeking financial security. Our approach combines time-tested wisdom with modern investment strategies.
@@ -86,8 +86,8 @@ export default function About() {
       {/* Philosophy */}
       <section className="py-32 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-10 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>Our Philosophy</h2>
-          <p className="text-slate-500 text-2xl font-medium leading-relaxed mb-16 italic">
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-12 tracking-tighter font-display">Our Philosophy</h2>
+          <p className="text-slate-500 text-2xl lg:text-3xl font-medium leading-relaxed mb-16 italic font-display">
             "Financial planning is not about predicting the future. It's about being prepared for it. Our goal remains to provide absolute peace through disciplined wealth management."
           </p>
           <div className="flex items-center justify-center gap-4">
@@ -95,7 +95,7 @@ export default function About() {
             <p className="text-lg font-black text-slate-900">Vishwas Deshpande</p>
             <div className="w-12 h-px bg-slate-200" />
           </div>
-          <p className="text-vdas-royal text-[10px] font-black uppercase tracking-widest mt-2">Founder & Principal Advisor</p>
+          <p className="text-vdas-blue text-[10px] font-black uppercase tracking-[0.3em] mt-2">Founder & Principal Advisor</p>
         </div>
       </section>
 
@@ -107,9 +107,9 @@ export default function About() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {TIMELINE.map((item) => (
-              <div key={item.year} className="bg-white p-10 rounded-[2rem] shadow-lg border border-slate-100">
-                <p className="text-3xl font-black text-vdas-royal mb-4">{item.year}</p>
-                <h3 className="text-slate-900 font-black text-lg mb-3 tracking-tight">{item.title}</h3>
+              <div key={item.year} className="bg-white p-10 rounded-[2.5rem] shadow-[0_15px_40px_-15px_rgba(0,0,0,0.05)] border border-slate-100 hover:border-vdas-blue/20 transition-all duration-500 group">
+                <p className="text-4xl font-black text-vdas-blue mb-4 tracking-tighter group-hover:scale-110 transition-transform origin-left">{item.year}</p>
+                <h3 className="text-slate-900 font-black text-xl mb-3 tracking-tight font-heading">{item.title}</h3>
                 <p className="text-slate-500 text-sm font-medium leading-relaxed">{item.desc}</p>
               </div>
             ))}

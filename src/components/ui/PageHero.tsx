@@ -87,7 +87,7 @@ export default function PageHero({
             >
               {title}
               {titleAccent && (
-                <span className="block text-vdas-orange mt-2 tracking-tight">{titleAccent}</span>
+                <span className="block text-vdas-orange mt-2 font-display">{titleAccent}</span>
               )}
             </motion.h1>
           </div>

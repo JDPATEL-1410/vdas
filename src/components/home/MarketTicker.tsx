@@ -39,26 +39,30 @@ export default function MarketTicker() {
 
   return (
     <div
-      className="w-full py-3 overflow-hidden bg-slate-950 border-y border-white/5"
+      className="w-full py-4 overflow-hidden bg-slate-950 border-y border-white/5"
     >
       <div className="flex items-center">
         <div
-          className="flex-shrink-0 px-8 py-1.5 text-[10px] font-black text-white uppercase tracking-[0.4em] relative overflow-hidden"
-          style={{ background: 'var(--mixed-gradient)' }}
+          className="flex-shrink-0 px-8 py-2 text-[10px] font-black text-white uppercase tracking-[0.4em] relative overflow-hidden flex items-center gap-3"
+          style={{ background: 'var(--vdas-blue)' }}
         >
+          <div className="w-2 h-2 bg-vdas-orange rounded-full animate-pulse" />
           <span className="relative z-10">Live Market Pulse</span>
-          <div className="absolute inset-0 bg-white/10 animate-pulse" />
         </div>
         <div className="overflow-hidden flex-1">
           <div className="flex ticker-animate whitespace-nowrap py-1">
             {items.map((item, i) => (
-              <span key={i} className="inline-flex items-center gap-4 px-10">
-                <span className="text-slate-500 font-black text-[10px] uppercase tracking-widest">{item.name}</span>
-                <span className="text-white font-black text-xs tracking-tighter">{item.value}</span>
-                <span className={`text-[10px] font-black tracking-widest ${item.isPositive ? 'text-vdas-royal' : 'text-vdas-orange'}`}>
-                  {item.isPositive ? '▲' : '▼'} {item.isPositive ? '+' : '-'}{item.change}%
+              <span key={i} className="inline-flex items-center gap-5 px-12 border-r border-white/5">
+                <span className="text-slate-500 font-black text-[10px] uppercase tracking-[0.3em]">{item.name}</span>
+                <span className="text-white font-black text-sm tracking-tighter">{item.value}</span>
+                <span className={`text-[10px] font-black tracking-widest flex items-center gap-1.5 ${item.isPositive ? 'text-emerald-400' : 'text-vdas-orange'}`}>
+                  {item.isPositive ? (
+                    <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" /></svg>
+                  ) : (
+                    <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                  )}
+                  {item.isPositive ? '+' : '-'}{item.change}%
                 </span>
-                <div className="w-1.5 h-1.5 rounded-full bg-white/5 mx-2" />
               </span>
             ))}
           </div>

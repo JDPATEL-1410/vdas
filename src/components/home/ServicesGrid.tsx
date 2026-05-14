@@ -75,10 +75,10 @@ export default function ServicesGrid() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl lg:text-6xl font-black text-vdas-blue-dark tracking-tighter"
+            className="text-5xl lg:text-7xl font-black text-vdas-blue-dark tracking-tighter leading-[1.1] font-display"
           >
             Financial Services for <br />
-            <span className="text-vdas-blue">Every Life Stage.</span>
+            <span className="text-vdas-blue italic">Every Life Stage.</span>
           </motion.h2>
         </div>
 
@@ -101,21 +101,23 @@ export default function ServicesGrid() {
                 </div>
               </div>
               <div className="p-10">
-                <h3 className="text-2xl font-black text-vdas-blue-dark mb-4">{svc.title}</h3>
+                <h3 className="text-2xl font-black text-vdas-blue-dark mb-4 tracking-tight">{svc.title}</h3>
                 <p className="text-slate-500 text-base font-medium mb-8 leading-relaxed">{svc.description}</p>
-                <div className="space-y-3 mb-10">
+                <div className="grid grid-cols-1 gap-3 mb-10">
                   {svc.features.map(f => (
-                    <div key={f} className="flex items-center gap-3">
+                    <div key={f} className="flex items-center gap-3 bg-slate-50 border border-slate-100 rounded-xl px-4 py-2 group-hover:bg-white transition-colors">
                       <div className={`w-1.5 h-1.5 rounded-full ${svc.accent === 'vdas-orange' ? 'bg-vdas-orange' : 'bg-vdas-blue'}`} />
-                      <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">{f}</span>
+                      <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{f}</span>
                     </div>
                   ))}
                 </div>
-                <Link to={svc.link} className={`inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] transition-all hover:gap-4 ${svc.accent === 'vdas-orange' ? 'text-vdas-orange' : 'text-vdas-blue'}`}>
+                <Link to={svc.link} className={`inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.3em] transition-all hover:gap-5 ${svc.accent === 'vdas-orange' ? 'text-vdas-orange' : 'text-vdas-blue'}`}>
                   Explore Service
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                  <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${svc.accent === 'vdas-orange' ? 'border-vdas-orange/20 group-hover:bg-vdas-orange group-hover:text-white' : 'border-vdas-blue/20 group-hover:bg-vdas-blue group-hover:text-white'}`}>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
                 </Link>
               </div>
             </motion.div>

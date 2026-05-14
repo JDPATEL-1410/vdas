@@ -21,8 +21,8 @@ export default function StatsCounter() {
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
       {STATS.map((stat, i) => {
         const isEven = i % 2 === 0;
-        const accentColor = isEven ? 'var(--vdas-royal)' : 'var(--vdas-orange)';
-        const bgOpacity = isEven ? 'bg-vdas-royal/10' : 'bg-vdas-orange/10';
+        const accentColor = isEven ? 'var(--vdas-blue)' : 'var(--vdas-orange)';
+        const bgOpacity = isEven ? 'bg-vdas-blue/10' : 'bg-vdas-orange/10';
 
         return (
           <motion.div
@@ -31,23 +31,23 @@ export default function StatsCounter() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-center justify-center p-10 rounded-[3rem] bg-white/5 border border-white/5 group hover:bg-white/10 hover:border-white/10 transition-all duration-700"
+            className="flex flex-col items-center justify-center p-12 rounded-[3.5rem] bg-white border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-premium hover:-translate-y-2 transition-all duration-700 group relative overflow-hidden"
           >
             <div className={`w-16 h-16 rounded-2xl ${bgOpacity} flex items-center justify-center text-4xl mb-8 group-hover:scale-110 transition-transform duration-700`}>
               {stat.icon}
             </div>
             
             <div className="mb-4">
-              <span className="text-4xl lg:text-6xl font-black tracking-tighter text-vdas-mixed-gradient">
+              <span className="text-4xl lg:text-6xl font-black tracking-tighter text-slate-900 group-hover:text-vdas-blue transition-colors font-heading">
                 <AnimatedValue target={stat.value} suffix={stat.suffix} />
               </span>
             </div>
 
-            <div className="text-white font-black text-xs uppercase tracking-[0.3em] mb-2 leading-tight" style={{ color: accentColor }}>
+            <div className="font-black text-[10px] uppercase tracking-[0.3em] mb-2 leading-tight font-heading" style={{ color: accentColor }}>
               {stat.label}
             </div>
             
-            <div className="text-slate-500 font-bold text-[10px] uppercase tracking-widest opacity-80 group-hover:opacity-100 transition-opacity">
+            <div className="text-slate-400 font-bold text-[9px] uppercase tracking-[0.2em] opacity-80 group-hover:opacity-100 transition-opacity">
               {stat.description}
             </div>
           </motion.div>

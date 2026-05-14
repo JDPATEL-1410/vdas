@@ -161,11 +161,11 @@ export default function HeroSection() {
                   {/* Heading */}
                   <h1 className="font-heading font-black tracking-tighter leading-[1.0] mb-6 text-center lg:text-left">
                     {/* Line 1 – blue */}
-                    <span className="block text-vdas-blue text-[2.2rem] sm:text-[3rem] lg:text-[3.8rem] xl:text-[4.5rem]">
+                    <span className="block text-vdas-blue text-[2.2rem] sm:text-[3rem] lg:text-[3.8rem] xl:text-[4.5rem] font-display">
                       {slide.title}
                     </span>
                     {/* Line 2 – orange with outline style */}
-                    <span className="block text-vdas-orange text-[2.8rem] sm:text-[3.8rem] lg:text-[4.8rem] xl:text-[5.5rem] -mt-2">
+                    <span className="block text-vdas-orange text-[2.8rem] sm:text-[3.8rem] lg:text-[4.8rem] xl:text-[5.5rem] -mt-2 font-display">
                       {slide.titleAccent}
                     </span>
                     {/* Line 3 – dark slate, smaller */}

@@ -63,15 +63,16 @@ export default function WhyVDAS() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-vdas-orange text-[11px] font-black uppercase tracking-[0.4em] mb-6"
+            className="text-vdas-orange text-[11px] font-black uppercase tracking-[0.5em] mb-6"
           >
-            Our Core Expertise
+            Institutional Advisory
           </motion.div>
-          <h2 className="text-5xl lg:text-6xl font-black text-vdas-blue-dark tracking-tighter">
-            Holistic Wealth <span className="text-vdas-blue">Solutions.</span>
+          <h2 className="text-5xl lg:text-7xl font-black text-vdas-blue-dark tracking-tighter leading-[1.1] mb-8 font-display">
+            Holistic Wealth <br />
+            <span className="text-vdas-blue italic">Solutions.</span>
           </h2>
-          <p className="text-slate-500 max-w-2xl mx-auto text-xl font-medium mt-6 leading-relaxed">
-            We provide a 360-degree approach to your finances, ensuring every aspect of your wealth is interconnected and optimized for growth.
+          <p className="text-slate-500 max-w-2xl mx-auto text-xl font-medium leading-relaxed">
+            We provide a 360-degree approach to your finances, ensuring every aspect of your wealth is interconnected and optimized for generational growth.
           </p>
         </div>
 
@@ -83,19 +84,21 @@ export default function WhyVDAS() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-slate-50/50 backdrop-blur-sm p-12 rounded-[3.5rem] border border-slate-100 hover:bg-white hover:shadow-premium transition-all duration-500 group"
+              className="bg-white p-12 rounded-[3.5rem] border border-slate-100 hover:border-vdas-blue/10 shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-premium transition-all duration-700 group relative overflow-hidden"
             >
-              <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mb-10 text-4xl shadow-sm group-hover:scale-110 group-hover:bg-vdas-blue group-hover:text-white transition-all duration-500">
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-vdas-blue to-vdas-orange opacity-0 group-hover:opacity-100 transition-opacity" />
+              
+              <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mb-10 text-4xl group-hover:scale-110 group-hover:bg-vdas-blue group-hover:text-white transition-all duration-700">
                 <div className="text-vdas-blue group-hover:text-white transition-colors">
                   {card.icon}
                 </div>
               </div>
               <h3 className="text-3xl font-black text-vdas-blue-dark mb-2 tracking-tighter">{card.title}</h3>
-              <p className="text-[10px] font-black text-vdas-orange uppercase tracking-[0.2em] mb-10">{card.subtitle}</p>
+              <p className="text-[10px] font-black text-vdas-orange uppercase tracking-[0.3em] mb-10">{card.subtitle}</p>
               <ul className="space-y-4">
                 {card.points.map((point) => (
                   <li key={point} className="flex items-center gap-4 text-base font-medium text-slate-500 group-hover:text-slate-900 transition-colors">
-                    <div className="w-1.5 h-1.5 rounded-full bg-vdas-blue/20" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-vdas-orange/30 group-hover:bg-vdas-orange transition-colors" />
                     {point}
                   </li>
                 ))}
@@ -103,6 +106,26 @@ export default function WhyVDAS() {
             </motion.div>
           ))}
         </div>
+
+        {/* ── Institutional Trust Bar ── */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-32 pt-20 border-t border-slate-100"
+        >
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div className="max-w-sm text-center lg:text-left">
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-4">Strategic Partners</p>
+              <h4 className="text-2xl font-black text-vdas-blue-dark tracking-tight">Access to India's leading financial institutions.</h4>
+            </div>
+            <div className="flex flex-wrap justify-center gap-10 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+              {['HDFC Bank', 'ICICI Prudential', 'SBI Mutual Fund', 'Kotak', 'Axis Bank', 'Nippon India'].map(brand => (
+                <span key={brand} className="text-xl font-black text-slate-400 uppercase tracking-widest">{brand}</span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -29,7 +29,7 @@ export default function ContactForm() {
   }
 
   const inputClass =
-    'w-full px-5 py-4 rounded-xl border text-sm outline-none transition-all focus:ring-2 focus:ring-vdas-royal/20 bg-white'
+    'w-full px-5 py-4 rounded-xl border text-sm outline-none transition-all focus:ring-4 focus:ring-vdas-blue/5 focus:border-vdas-blue bg-white'
   
   return (
     <motion.form
@@ -42,7 +42,7 @@ export default function ContactForm() {
         {/* Name */}
         <div>
           <label className="block text-xs font-black text-slate-900 uppercase tracking-widest mb-2">
-            Full Name <span className="text-vdas-royal">*</span>
+            Full Name <span className="text-vdas-blue">*</span>
           </label>
           <input
             {...register('name', { required: 'Name is required' })}
@@ -56,7 +56,7 @@ export default function ContactForm() {
         {/* Email */}
         <div>
           <label className="block text-xs font-black text-slate-900 uppercase tracking-widest mb-2">
-            Email Address <span className="text-vdas-royal">*</span>
+            Email Address <span className="text-vdas-blue">*</span>
           </label>
           <input
             {...register('email', {
@@ -73,7 +73,7 @@ export default function ContactForm() {
         {/* Phone */}
         <div>
           <label className="block text-xs font-black text-slate-900 uppercase tracking-widest mb-2">
-            Phone Number <span className="text-vdas-royal">*</span>
+            Phone Number <span className="text-vdas-blue">*</span>
           </label>
           <input
             {...register('phone', {
@@ -102,7 +102,7 @@ export default function ContactForm() {
       {/* Service */}
       <div>
         <label className="block text-xs font-black text-slate-900 uppercase tracking-widest mb-2">
-          Service Interested In <span className="text-vdas-royal">*</span>
+          Service Interested In <span className="text-vdas-blue">*</span>
         </label>
         <select
           {...register('service', { required: 'Please select a service' })}
@@ -136,10 +136,10 @@ export default function ContactForm() {
           {...register('consent', { required: 'Required' })}
           type="checkbox"
           id="consent"
-          className="mt-1 w-4 h-4 rounded border-slate-300 text-vdas-royal focus:ring-vdas-royal"
+          className="mt-1 w-4 h-4 rounded border-slate-300 text-vdas-blue focus:ring-vdas-blue"
         />
         <label htmlFor="consent" className="text-[11px] text-slate-500 font-medium leading-relaxed">
-          I consent to being contacted by VDAS regarding my query. My information will be kept confidential. <span className="text-vdas-royal">*</span>
+          I consent to being contacted by VDAS regarding my query. My information will be kept confidential. <span className="text-vdas-blue">*</span>
         </label>
       </div>
 
@@ -147,9 +147,14 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-4 rounded-xl bg-vdas-royal text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-vdas-royal/20 hover:shadow-vdas-royal/40 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+        className="w-full py-5 rounded-2xl bg-vdas-blue text-white font-black text-xs uppercase tracking-[0.3em] shadow-xl shadow-vdas-blue/20 hover:shadow-vdas-blue/40 hover:-translate-y-1 transition-all disabled:opacity-50 flex items-center justify-center gap-3 group"
       >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+        {isSubmitting ? 'Sending Request...' : 'Send Message'}
+        {!isSubmitting && (
+          <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        )}
       </button>
     </motion.form>
   )
