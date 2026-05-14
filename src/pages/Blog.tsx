@@ -15,11 +15,9 @@ interface ETArticle {
 }
 
 const FEEDS = [
-  // NJ Wealth Feeds
   { url: 'https://www.njindiaonline.com/wealth/common/rss/newsletter.php?id=wealth', label: 'Personal Finance', source: 'NJ' as const },
   { url: 'https://www.njindiaonline.com/wealth/common/rss/newsletter.php?id=market', label: 'Market Pulse', source: 'NJ' as const },
   { url: 'https://www.njindiaonline.com/wealth/common/rss/newsletter.php?id=economy', label: 'Economic View', source: 'NJ' as const },
-  // Economic Times Feeds
   { url: 'https://economictimes.indiatimes.com/wealth/rssfeeds/8375551.cms', label: 'Personal Finance', source: 'ET' as const },
   { url: 'https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms', label: 'Market Pulse', source: 'ET' as const },
   { url: 'https://economictimes.indiatimes.com/news/economy/rssfeeds/1286551815.cms', label: 'Economic View', source: 'ET' as const }
@@ -29,14 +27,101 @@ const FALLBACK_ARTICLES: ETArticle[] = [
   {
     title: "Mastering Asset Allocation in Volatile Markets",
     link: "/services/goal-base-investing",
-    pubDate: "May 12, 2026",
+    pubDate: "May 14, 2026",
     timestamp: Date.now(),
     thumbnail: "/wealth_management_dashboard_1778479882040.png",
     description: "Discover why asset allocation is the cornerstone of successful wealth management and how to rebalance your portfolio for maximum stability.",
     categories: ["Personal Finance"],
     source: "ET"
+  },
+  {
+    title: "SIP vs Lumpsum: Which Works Best in 2026?",
+    link: "/calculator/sip",
+    pubDate: "May 13, 2026",
+    timestamp: Date.now() - 86400000,
+    thumbnail: "/wealth_management_light_hero_1778502035521.png",
+    description: "A detailed breakdown of SIP and Lumpsum investing strategies tailored for the current market environment and interest rate cycle.",
+    categories: ["Market Pulse"],
+    source: "NJ"
+  },
+  {
+    title: "Tax Planning Before the Financial Year Ends",
+    link: "/services/tax-solution",
+    pubDate: "May 12, 2026",
+    timestamp: Date.now() - 172800000,
+    thumbnail: "/sip_goals_light_hero_1778502068391.png",
+    description: "Essential last-minute tax-saving strategies including ELSS, NPS contributions, and HRA calculations for salaried professionals.",
+    categories: ["Economic View"],
+    source: "ET"
   }
 ]
+
+const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET'): Promise<ETArticle[]> => {
+  const proxies = [
+    `https://corsproxy.io/?${encodeURIComponent(url)}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
+  ]
+
+  let text = ''
+  for (const proxy of proxies) {
+    try {
+      const res = await fetch(proxy)
+      if (res.ok) {
+        text = await res.text()
+        if (text) break
+      }
+    } catch (_) { continue }
+  }
+
+  if (!text) return []
+
+  try {
+    const parser = new DOMParser()
+    const xmlDoc = parser.parseFromString(text, 'text/xml')
+    const items = xmlDoc.querySelectorAll('item')
+
+    return Array.from(items).map(item => {
+      const title = item.querySelector('title')?.textContent || ''
+      const link = item.querySelector('link')?.textContent || ''
+      const pubDate = item.querySelector('pubDate')?.textContent || ''
+      const desc = item.querySelector('description')?.textContent || ''
+
+      let category = item.querySelector('category')?.textContent || defaultLabel
+      if (category.toLowerCase().includes('wealth') || category.toLowerCase().includes('personal')) category = 'Personal Finance'
+      if (category.toLowerCase().includes('market') || category.toLowerCase().includes('stock')) category = 'Market Pulse'
+      if (category.toLowerCase().includes('economy') || category.toLowerCase().includes('policy')) category = 'Economic View'
+      if (!['Personal Finance', 'Market Pulse', 'Economic View'].includes(category)) category = defaultLabel
+
+      let thumb = ''
+      const media = item.getElementsByTagName('media:content')
+      if (media.length > 0) thumb = media[0].getAttribute('url') || ''
+      if (!thumb) {
+        const enclosure = item.querySelector('enclosure')
+        if (enclosure) thumb = enclosure.getAttribute('url') || ''
+      }
+      if (!thumb) {
+        const imgMatch = desc.match(/<img[^>]+src="([^">]+)"/)
+        if (imgMatch) thumb = imgMatch[1]
+      }
+
+      const date = new Date(pubDate)
+      const isValid = !isNaN(date.getTime())
+
+      return {
+        title,
+        link,
+        pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Recent Edition',
+        timestamp: isValid ? date.getTime() : Date.now(),
+        thumbnail: thumb || '/wealth_management_dashboard_1778479882040.png',
+        description: desc.replace(/<[^>]*>?/gm, '').slice(0, 150).trim() + '...',
+        categories: [category],
+        source
+      }
+    })
+  } catch (_) {
+    return []
+  }
+}
 
 export default function Blog() {
   const [articles, setArticles] = useState<ETArticle[]>([])
@@ -48,79 +133,7 @@ export default function Blog() {
       setLoading(true)
       let allFetched: ETArticle[] = []
 
-          try {
-            // Use multiple proxies for maximum reliability on Vercel
-            const proxies = [
-              `https://corsproxy.io/?${encodeURIComponent(url)}`,
-              `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
-            ]
-            
-            let response = null
-            let text = ""
-            
-            for (const proxy of proxies) {
-              try {
-                response = await fetch(proxy)
-                if (response.ok) {
-                  text = await response.text()
-                  if (text) break
-                }
-              } catch (e) { continue }
-            }
-          
-          if (text) {
-            const parser = new DOMParser()
-            const xmlDoc = parser.parseFromString(text, "text/xml")
-            const items = xmlDoc.querySelectorAll("item")
-            
-            return Array.from(items).map(item => {
-              const title = item.querySelector("title")?.textContent || ""
-              const link = item.querySelector("link")?.textContent || ""
-              const pubDate = item.querySelector("pubDate")?.textContent || ""
-              const desc = item.querySelector("description")?.textContent || ""
-              
-              let category = item.querySelector("category")?.textContent || defaultLabel
-              if (category.toLowerCase().includes('wealth') || category.toLowerCase().includes('personal')) category = 'Personal Finance'
-              if (category.toLowerCase().includes('market') || category.toLowerCase().includes('stock')) category = 'Market Pulse'
-              if (category.toLowerCase().includes('economy') || category.toLowerCase().includes('policy')) category = 'Economic View'
-              if (!['Personal Finance', 'Market Pulse', 'Economic View'].includes(category)) category = defaultLabel
-
-              let thumb = ""
-              const media = item.getElementsByTagName("media:content")
-              if (media.length > 0) thumb = media[0].getAttribute("url") || ""
-              if (!thumb) {
-                const enclosure = item.querySelector("enclosure")
-                if (enclosure) thumb = enclosure.getAttribute("url") || ""
-              }
-              if (!thumb) {
-                const imgMatch = desc.match(/<img[^>]+src="([^">]+)"/)
-                if (imgMatch) thumb = imgMatch[1]
-              }
-
-              const date = new Date(pubDate)
-              const isValidDate = !isNaN(date.getTime())
-
-              return {
-                title,
-                link,
-                pubDate: isValidDate ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Recent Edition',
-                timestamp: isValidDate ? date.getTime() : Date.now(),
-                thumbnail: thumb || "/wealth_management_dashboard_1778479882040.png",
-                description: desc.replace(/<[^>]*>?/gm, '').slice(0, 150).trim() + '...',
-                categories: [category],
-                source
-              }
-            })
-          }
-        } catch (e) {
-          console.error(`Failed to fetch ${url}`, e)
-        }
-        return []
-      }
-
-      // Fetch ALL feeds in parallel
-      const promises = FEEDS.map(f => fetchAndParse(f.url, f.label, f.source))
-      const results = await Promise.all(promises)
+      const results = await Promise.all(FEEDS.map(f => fetchFeed(f.url, f.label, f.source)))
       results.forEach(res => { allFetched = [...allFetched, ...res] })
 
       if (allFetched.length === 0) {
@@ -129,7 +142,7 @@ export default function Blog() {
         const processed = allFetched
           .sort((a, b) => b.timestamp - a.timestamp)
           .filter((v, i, a) => a.findIndex(t => t.link === v.link) === i)
-          .slice(0, 36) // Show more articles now
+          .slice(0, 36)
         setArticles(processed)
       }
       setLoading(false)
@@ -226,8 +239,6 @@ export default function Blog() {
                       className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 opacity-95 group-hover:opacity-100" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    
-                    {/* Source Tag */}
                     <div className="absolute top-6 right-6">
                        <span className={`px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest backdrop-blur-md border ${
                          article.source === 'ET' 
@@ -251,7 +262,7 @@ export default function Blog() {
                     <a href={article.link} target="_blank" rel="noopener noreferrer">{article.title}</a>
                   </h3>
                   
-                  <p className="text-slate-500 text-base font-medium leading-relaxed mb-10 line-clamp-3 opacity-80 group-hover:opacity-100 transition-opacity">
+                  <p className="text-slate-500 text-base font-medium leading-relaxed mb-10 line-clamp-3">
                     {article.description}
                   </p>
 

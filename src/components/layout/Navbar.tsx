@@ -88,8 +88,8 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-xl shadow-slate-100 py-3' : 'bg-white/80 backdrop-blur-md py-5'
+      <header className={`fixed top-8 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white shadow-xl shadow-slate-100 py-3' : 'bg-white/95 backdrop-blur-md py-4'
       } ${mobileOpen ? 'opacity-0 lg:opacity-100' : 'opacity-100'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
