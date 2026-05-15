@@ -22,6 +22,8 @@ function buildMarketData(): MarketItem[] {
     { name: 'USD/INR', value: `Rs.${rand(83, 1.5)}`, ...mkChange() },
     { name: 'RBI REPO RATE', value: '6.50%', change: '0.00', isPositive: true },
     { name: 'NIFTY BANK', value: Number(rand(51000, 1000)).toLocaleString('en-IN'), ...mkChange() },
+    { name: 'ARN-90854', value: 'AMFI REGISTERED', change: 'LIVE', isPositive: true },
+    { name: 'LEGACY', value: '33+ YEARS', change: 'TRUST', isPositive: true },
   ]
 }
 
@@ -39,7 +41,7 @@ export default function MarketTicker() {
 
   return (
     <div
-      className="w-full py-4 overflow-hidden bg-slate-950 border-y border-white/5"
+      className="fixed top-0 left-0 right-0 z-[60] w-full h-8 overflow-hidden bg-slate-950 border-b border-white/5 flex items-center"
     >
       <div className="flex items-center">
         <div
@@ -68,6 +70,18 @@ export default function MarketTicker() {
           </div>
         </div>
       </div>
+      <style>{`
+        @keyframes ticker {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .ticker-animate {
+          animation: ticker 40s linear infinite;
+        }
+        .ticker-animate:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </div>
   )
 }

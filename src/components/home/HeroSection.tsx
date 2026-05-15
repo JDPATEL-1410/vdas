@@ -102,25 +102,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col bg-white overflow-hidden">
 
-      {/* ── Premium Top Ticker Bar ── */}
-      <div className="fixed top-0 left-0 right-0 z-[45] bg-vdas-blue-dark h-8 flex items-center overflow-hidden">
-        <div className="flex items-center gap-0 w-full overflow-hidden">
-          <div className="flex-shrink-0 px-4 bg-vdas-orange text-white text-[9px] font-black uppercase tracking-widest h-8 flex items-center gap-2">
-            <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-            LIVE
-          </div>
-          <div className="flex-1 overflow-hidden relative h-8">
-            <div className="flex animate-[marquee_30s_linear_infinite] items-center h-8 whitespace-nowrap gap-10">
-              {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
-                <span key={i} className="text-white/80 text-[9px] font-bold uppercase tracking-[0.25em] flex items-center gap-3">
-                  <span className="w-1 h-1 bg-vdas-orange rounded-full flex-shrink-0" />
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       {/* ── Decorative Background Shapes ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
