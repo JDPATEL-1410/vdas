@@ -13,7 +13,6 @@ interface Article {
 }
 
 const FEEDS = [
-  { url: 'https://www.njindiaonline.com/wealth/common/rss/newsletter.php?id=wealth', label: 'Personal Finance', source: 'NJ' },
   { url: 'https://economictimes.indiatimes.com/wealth/rssfeeds/8375551.cms', label: 'Personal Finance', source: 'ET' },
   { url: 'https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms', label: 'Market Pulse', source: 'ET' }
 ]
@@ -50,14 +49,18 @@ export default function LatestInsights() {
         const fetchAndParse = async (url: string, defaultLabel: string, source: string) => {
           const proxies = [
             `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-            url
+            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
           ]
           
           let text = ""
           for (const proxy of proxies) {
             try {
-              const res = await fetch(proxy)
+              const controller = new AbortController();
+              const id = setTimeout(() => controller.abort(), 5000);
+              
+              const res = await fetch(proxy, { signal: controller.signal })
+              clearTimeout(id);
+              
               if (!res.ok) continue
               text = await res.text()
               

@@ -15,9 +15,6 @@ interface ETArticle {
 }
 
 const FEEDS = [
-  { url: 'https://www.njindiaonline.com/wealth/common/rss/newsletter.php?id=wealth', label: 'Personal Finance', source: 'NJ' as const },
-  { url: 'https://www.njindiaonline.com/wealth/common/rss/newsletter.php?id=market', label: 'Market Pulse', source: 'NJ' as const },
-  { url: 'https://www.njindiaonline.com/wealth/common/rss/newsletter.php?id=economy', label: 'Economic View', source: 'NJ' as const },
   { url: 'https://economictimes.indiatimes.com/wealth/rssfeeds/8375551.cms', label: 'Personal Finance', source: 'ET' as const },
   { url: 'https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms', label: 'Market Pulse', source: 'ET' as const },
   { url: 'https://economictimes.indiatimes.com/news/economy/rssfeeds/1286551815.cms', label: 'Economic View', source: 'ET' as const }
@@ -26,8 +23,8 @@ const FEEDS = [
 const FALLBACK_ARTICLES: ETArticle[] = [
   {
     title: "Mastering Asset Allocation in Volatile Markets",
-    link: "/services/goal-base-investing",
-    pubDate: "May 14, 2026",
+    link: "https://economictimes.indiatimes.com/wealth",
+    pubDate: "May 15, 2026",
     timestamp: Date.now(),
     thumbnail: "/wealth_management_dashboard_1778479882040.png",
     description: "Discover why asset allocation is the cornerstone of successful wealth management and how to rebalance your portfolio for maximum stability.",
@@ -36,21 +33,51 @@ const FALLBACK_ARTICLES: ETArticle[] = [
   },
   {
     title: "SIP vs Lumpsum: Which Works Best in 2026?",
-    link: "/calculator/sip",
-    pubDate: "May 13, 2026",
+    link: "https://economictimes.indiatimes.com/wealth",
+    pubDate: "May 14, 2026",
     timestamp: Date.now() - 86400000,
     thumbnail: "/wealth_management_light_hero_1778502035521.png",
     description: "A detailed breakdown of SIP and Lumpsum investing strategies tailored for the current market environment and interest rate cycle.",
     categories: ["Market Pulse"],
-    source: "NJ"
+    source: "ET"
+  },
+  {
+    title: "The Rise of Mid-cap Funds: Growth and Risk Factors",
+    link: "https://economictimes.indiatimes.com/wealth",
+    pubDate: "May 14, 2026",
+    timestamp: Date.now() - 90000000,
+    thumbnail: "/sip_goals_light_hero_1778502068391.png",
+    description: "Mid-cap mutual funds have seen significant inflows. We analyze if the risk-reward ratio still favors new investors in the current rally.",
+    categories: ["Market Pulse"],
+    source: "ET"
   },
   {
     title: "Tax Planning Before the Financial Year Ends",
-    link: "/services/tax-solution",
-    pubDate: "May 12, 2026",
+    link: "https://economictimes.indiatimes.com/wealth",
+    pubDate: "May 13, 2026",
     timestamp: Date.now() - 172800000,
     thumbnail: "/sip_goals_light_hero_1778502068391.png",
     description: "Essential last-minute tax-saving strategies including ELSS, NPS contributions, and HRA calculations for salaried professionals.",
+    categories: ["Economic View"],
+    source: "ET"
+  },
+  {
+    title: "Retirement Planning: How Much is Enough for 2040?",
+    link: "https://economictimes.indiatimes.com/wealth",
+    pubDate: "May 12, 2026",
+    timestamp: Date.now() - 259200000,
+    thumbnail: "/wealth_management_dashboard_1778479882040.png",
+    description: "Calculating your retirement corpus requires accounting for lifestyle inflation. Learn how to build a resilient retirement fund.",
+    categories: ["Personal Finance"],
+    source: "ET"
+  },
+  {
+    title: "Global Economic Shifts and Indian Markets",
+    link: "https://economictimes.indiatimes.com/wealth",
+    pubDate: "May 11, 2026",
+    timestamp: Date.now() - 345600000,
+    thumbnail: "/wealth_management_light_hero_1778502035521.png",
+    description: "How changes in US Federal Reserve policies and global supply chains are impacting Indian equity and debt markets in 2026.",
     categories: ["Economic View"],
     source: "ET"
   }
@@ -59,14 +86,19 @@ const FALLBACK_ARTICLES: ETArticle[] = [
 const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET'): Promise<ETArticle[]> => {
   const proxies = [
     `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-    url
+    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
   ]
 
   let text = ''
   for (const proxy of proxies) {
     try {
-      const res = await fetch(proxy)
+      // Use a timeout to avoid 408s
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), 5000);
+      
+      const res = await fetch(proxy, { signal: controller.signal })
+      clearTimeout(id);
+      
       if (!res.ok) continue
       
       text = await res.text()
@@ -76,40 +108,7 @@ const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET')
     }
   }
 
-  if (!text) {
-    // Last ditch: free rss2json
-    try {
-      const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
-      const res = await fetch(rss2jsonUrl)
-      if (res.ok) {
-        const data = await res.json()
-        if (data.status === 'ok' && data.items) {
-          return data.items.map((item: any) => {
-            let category = defaultLabel
-            const itemCat = item.categories?.[0] || ''
-            if (itemCat.toLowerCase().includes('wealth') || itemCat.toLowerCase().includes('personal')) category = 'Personal Finance'
-            if (itemCat.toLowerCase().includes('market') || itemCat.toLowerCase().includes('stock')) category = 'Market Pulse'
-            if (itemCat.toLowerCase().includes('economy') || itemCat.toLowerCase().includes('policy')) category = 'Economic View'
-            
-            const date = new Date(item.pubDate)
-            const isValid = !isNaN(date.getTime())
-
-            return {
-              title: item.title,
-              link: item.link,
-              pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Recent Edition',
-              timestamp: isValid ? date.getTime() : Date.now(),
-              thumbnail: item.thumbnail || item.enclosure?.link || '/wealth_management_dashboard_1778479882040.png',
-              description: item.description.replace(/<[^>]*>?/gm, '').slice(0, 150).trim() + '...',
-              categories: [category],
-              source
-            }
-          })
-        }
-      }
-    } catch (e) {}
-    return []
-  }
+  if (!text) return []
 
   try {
     const parser = new DOMParser()
