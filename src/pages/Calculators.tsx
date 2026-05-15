@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageSEO from '../components/ui/PageSEO'
-import PageHeader from '../components/ui/PageHeader'
+import PageHero from '../components/ui/PageHero'
 
 const CALC_CATEGORIES = [
   {
@@ -148,9 +148,9 @@ export default function Calculators() {
         description="14 professional financial calculators — SIP, lumpsum, SWP, retirement, EMI, home loan, tax, insurance, and more. Plan your investments with precision."
       />
       
-      <PageHeader 
+      <PageHero 
         title="Precision Planning Tools."
-        subtitle="14 Professional-grade calculators to help you simulate investments, plan goals, and visualize your financial destiny."
+        description="14 Professional-grade calculators to help you simulate investments, plan goals, and visualize your financial destiny."
         image="/financial_planning_precision_tools_1778484192484.png"
         breadcrumbs={[{ label: 'Calculators' }]}
       />
