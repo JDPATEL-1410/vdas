@@ -57,64 +57,66 @@ const FALLBACK_ARTICLES: ETArticle[] = [
 ]
 
 const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET'): Promise<ETArticle[]> => {
-  // Primary: Use rss2json for robust server-side conversion and CORS handling
-  const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&api_key=4v1g9l5v3m8s7j2r0q6p4n5z8y3x1w0v`; // Temporary key or free tier
-
-  try {
-    const res = await fetch(rss2jsonUrl)
-    if (res.ok) {
-      const data = await res.json()
-      if (data.status === 'ok' && data.items) {
-        return data.items.map((item: any) => {
-          let category = defaultLabel
-          const itemCat = item.categories?.[0] || ''
-          if (itemCat.toLowerCase().includes('wealth') || itemCat.toLowerCase().includes('personal')) category = 'Personal Finance'
-          if (itemCat.toLowerCase().includes('market') || itemCat.toLowerCase().includes('stock')) category = 'Market Pulse'
-          if (itemCat.toLowerCase().includes('economy') || itemCat.toLowerCase().includes('policy')) category = 'Economic View'
-          
-          const date = new Date(item.pubDate)
-          const isValid = !isNaN(date.getTime())
-
-          return {
-            title: item.title,
-            link: item.link,
-            pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Recent Edition',
-            timestamp: isValid ? date.getTime() : Date.now(),
-            thumbnail: item.thumbnail || item.enclosure?.link || '/wealth_management_dashboard_1778479882040.png',
-            description: item.description.replace(/<[^>]*>?/gm, '').slice(0, 150).trim() + '...',
-            categories: [category],
-            source
-          }
-        })
-      }
-    }
-  } catch (e) { 
-    console.warn(`rss2json failed for ${url}, trying fallback proxies...`)
-  }
-
-  // Fallback: Multiple CORS proxies if rss2json fails
   const proxies = [
     `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
+    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+    `https://corsproxy.io/?${encodeURIComponent(url)}`,
+    url
   ]
 
   let text = ''
   for (const proxy of proxies) {
     try {
       const res = await fetch(proxy)
-      if (res.ok) {
-        if (proxy.includes('allorigins')) {
-          const json = await res.json()
-          text = json.contents
-        } else {
-          text = await res.text()
-        }
-        if (text && text.includes('<rss')) break
+      if (!res.ok) continue
+      
+      if (proxy.includes('allorigins')) {
+        const json = await res.json()
+        text = json.contents
+      } else {
+        text = await res.text()
       }
-    } catch (_) { continue }
+      
+      if (text && (text.includes('<rss') || text.includes('<channel'))) break
+    } catch (_) { 
+      continue 
+    }
   }
 
-  if (!text) return []
+  if (!text) {
+    // Last ditch: free rss2json
+    try {
+      const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
+      const res = await fetch(rss2jsonUrl)
+      if (res.ok) {
+        const data = await res.json()
+        if (data.status === 'ok' && data.items) {
+          return data.items.map((item: any) => {
+            let category = defaultLabel
+            const itemCat = item.categories?.[0] || ''
+            if (itemCat.toLowerCase().includes('wealth') || itemCat.toLowerCase().includes('personal')) category = 'Personal Finance'
+            if (itemCat.toLowerCase().includes('market') || itemCat.toLowerCase().includes('stock')) category = 'Market Pulse'
+            if (itemCat.toLowerCase().includes('economy') || itemCat.toLowerCase().includes('policy')) category = 'Economic View'
+            
+            const date = new Date(item.pubDate)
+            const isValid = !isNaN(date.getTime())
+
+            return {
+              title: item.title,
+              link: item.link,
+              pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Recent Edition',
+              timestamp: isValid ? date.getTime() : Date.now(),
+              thumbnail: item.thumbnail || item.enclosure?.link || '/wealth_management_dashboard_1778479882040.png',
+              description: item.description.replace(/<[^>]*>?/gm, '').slice(0, 150).trim() + '...',
+              categories: [category],
+              source
+            }
+          })
+        }
+      }
+    } catch (e) {}
+    return []
+  }
 
   try {
     const parser = new DOMParser()
@@ -137,7 +139,7 @@ const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET')
       if (media.length > 0) thumb = media[0].getAttribute('url') || ''
       if (!thumb) {
         const enclosure = item.querySelector('enclosure')
-        if (enclosure) thumb = enclosure.getAttribute('url') || ''
+        if (enclosure) thumb = enclosure.getAttribute("url") || ""
       }
       if (!thumb) {
         const imgMatch = desc.match(/<img[^>]+src="([^">]+)"/)

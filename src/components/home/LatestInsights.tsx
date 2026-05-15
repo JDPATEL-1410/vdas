@@ -29,97 +29,125 @@ export default function LatestInsights() {
         let allFetched: Article[] = []
         
         const fetchAndParse = async (url: string, defaultLabel: string, source: string) => {
-          // Primary: rss2json
-          const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&api_key=4v1g9l5v3m8s7j2r0q6p4n5z8y3x1w0v`;
-          
-          try {
-            const res = await fetch(rss2jsonUrl)
-            if (res.ok) {
-              const data = await res.json()
-              if (data.status === 'ok' && data.items) {
-                return data.items.map((item: any) => {
-                  const date = new Date(item.pubDate)
-                  const isValid = !isNaN(date.getTime())
-                  return {
-                    title: item.title,
-                    link: item.link,
-                    pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : 'Recent',
-                    timestamp: isValid ? date.getTime() : Date.now(),
-                    thumbnail: item.thumbnail || item.enclosure?.link || "/wealth_management_dashboard_1778479882040.png",
-                    category: defaultLabel,
-                    source
-                  }
-                })
-              }
-            }
-          } catch (e) {
-            console.warn(`rss2json failed for ${url} in LatestInsights`)
-          }
-
-          // Fallback: CORS proxies
           const proxies = [
             `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
+            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+            `https://cors-anywhere.herokuapp.com/${url}`,
+            url // Direct (might work if server has CORS)
           ]
           
           let text = ""
           for (const proxy of proxies) {
             try {
-              const response = await fetch(proxy)
-              if (response.ok) {
-                if (proxy.includes('allorigins')) {
-                  const json = await response.json()
-                  text = json.contents
-                } else {
-                  text = await response.text()
-                }
-                if (text && text.includes('<rss')) break
+              const res = await fetch(proxy)
+              if (!res.ok) continue
+              
+              if (proxy.includes('allorigins')) {
+                const json = await res.json()
+                text = json.contents
+              } else {
+                text = await res.text()
               }
-            } catch (e) { continue }
+              
+              if (text && (text.includes('<rss') || text.includes('<channel'))) break
+            } catch (e) {
+              console.warn(`Proxy ${proxy} failed for ${url}`)
+              continue
+            }
           }
           
+          if (!text) {
+            // Last resort: rss2json (with a different API key or just the free tier)
+            try {
+              const rss2json = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`
+              const res = await fetch(rss2json)
+              if (res.ok) {
+                const data = await res.json()
+                if (data.status === 'ok' && data.items) {
+                  return data.items.map((item: any) => ({
+                    title: item.title,
+                    link: item.link,
+                    pubDate: new Date(item.pubDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }),
+                    timestamp: new Date(item.pubDate).getTime(),
+                    thumbnail: item.thumbnail || item.enclosure?.link || "/wealth_management_dashboard_1778479882040.png",
+                    category: defaultLabel,
+                    source
+                  }))
+                }
+              }
+            } catch (e) {}
+          }
+
           if (text) {
-            const parser = new DOMParser()
-            const xmlDoc = parser.parseFromString(text, "text/xml")
-            const items = xmlDoc.querySelectorAll("item")
-            
-            return Array.from(items).map(item => {
-              const title = item.querySelector("title")?.textContent || ""
-              const link = item.querySelector("link")?.textContent || ""
-              const pubDate = item.querySelector("pubDate")?.textContent || ""
-              const desc = item.querySelector("description")?.textContent || ""
+            try {
+              const parser = new DOMParser()
+              const xmlDoc = parser.parseFromString(text, "text/xml")
+              const items = xmlDoc.querySelectorAll("item")
               
-              let thumb = ""
-              const media = item.getElementsByTagName("media:content")
-              if (media.length > 0) thumb = media[0].getAttribute("url") || ""
-              if (!thumb) {
-                const enclosure = item.querySelector("enclosure")
-                if (enclosure) thumb = enclosure.getAttribute("url") || ""
-              }
-              if (!thumb) {
-                const imgMatch = desc.match(/<img[^>]+src="([^">]+)"/)
-                if (imgMatch) thumb = imgMatch[1]
-              }
+              return Array.from(items).map(item => {
+                const title = item.querySelector("title")?.textContent || ""
+                const link = item.querySelector("link")?.textContent || ""
+                const pubDate = item.querySelector("pubDate")?.textContent || ""
+                const desc = item.querySelector("description")?.textContent || ""
+                
+                let thumb = ""
+                const media = item.getElementsByTagName("media:content")
+                if (media.length > 0) thumb = media[0].getAttribute("url") || ""
+                if (!thumb) {
+                  const enclosure = item.querySelector("enclosure")
+                  if (enclosure) thumb = enclosure.getAttribute("url") || ""
+                }
+                if (!thumb) {
+                  const imgMatch = desc.match(/<img[^>]+src="([^">]+)"/)
+                  if (imgMatch) thumb = imgMatch[1]
+                }
 
-              const date = new Date(pubDate)
-              const isValid = !isNaN(date.getTime())
+                const date = new Date(pubDate)
+                const isValid = !isNaN(date.getTime())
 
-              return {
-                title,
-                link,
-                pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : 'Recent',
-                timestamp: isValid ? date.getTime() : Date.now(),
-                thumbnail: thumb || "/wealth_management_dashboard_1778479882040.png",
-                category: defaultLabel,
-                source
-              }
-            })
+                return {
+                  title,
+                  link,
+                  pubDate: isValid ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : 'Recent',
+                  timestamp: isValid ? date.getTime() : Date.now(),
+                  thumbnail: thumb || "/wealth_management_dashboard_1778479882040.png",
+                  category: defaultLabel,
+                  source
+                }
+              })
+            } catch (e) {
+              console.error("XML Parse error:", e)
+            }
           }
           return []
         }
 
         const results = await Promise.all(FEEDS.map(f => fetchAndParse(f.url, f.label, f.source)))
         allFetched = results.flat()
+
+        // Fallback to static data if all fetches fail
+        if (allFetched.length === 0) {
+          allFetched = [
+            {
+              title: "Market Outlook: Navigating Volatility in 2026",
+              link: "/blog",
+              pubDate: "Today",
+              timestamp: Date.now(),
+              thumbnail: "/wealth_management_dashboard_1778479882040.png",
+              category: "Market Pulse",
+              source: "VDAS"
+            },
+            {
+              title: "The Power of SIP: Building Wealth for India's Future",
+              link: "/blog",
+              pubDate: "Yesterday",
+              timestamp: Date.now() - 86400000,
+              thumbnail: "/sip_goals_light_hero_1778502068391.png",
+              category: "Personal Finance",
+              source: "VDAS"
+            }
+          ]
+        }
 
         const processed = allFetched
           .sort((a, b) => b.timestamp - a.timestamp)

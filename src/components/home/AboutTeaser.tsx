@@ -11,11 +11,11 @@ export default function AboutTeaser() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative"
+            className="relative min-h-[400px]"
           >
             <div className="rounded-[4rem] overflow-hidden shadow-premium border-8 border-slate-50 bg-white">
               <img 
-                src="/professional_executive_portrait_1778220813591.png" 
+                src="/founder_portrait.png" 
                 alt="Vishwas Deshpande" 
                 className="w-full h-auto object-cover"
               />

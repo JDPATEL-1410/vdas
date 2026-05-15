@@ -41,7 +41,7 @@ export default function About() {
             >
               <div className="rounded-[4rem] overflow-hidden shadow-premium border-8 border-slate-50 bg-white">
                 <img 
-                  src="/professional_executive_portrait_1778220813591.png" 
+                  src="/founder_portrait.png" 
                   alt="Vishwas Deshpande" 
                   className="w-full h-auto object-cover"
                 />
