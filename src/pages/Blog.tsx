@@ -253,7 +253,7 @@ export default function Blog() {
               ))}
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-16 lg:gap-y-24">
               {filteredArticles.map((article, i) => (
                 <motion.article 
                   key={article.link}
@@ -261,58 +261,52 @@ export default function Blog() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: (i % 3) * 0.1 }}
-                  className="group flex flex-col"
+                  className="group flex flex-col bg-white rounded-[3rem] border border-slate-100 hover:border-vdas-blue transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] overflow-hidden"
                 >
                   <a 
                     href={article.link} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="block relative overflow-hidden rounded-[3.5rem] mb-10 aspect-[16/11] shadow-premium group-hover:shadow-2xl transition-all duration-700 bg-slate-50 border border-slate-100"
+                    className="block relative overflow-hidden aspect-[16/10]"
                   >
                     <img 
                       src={article.thumbnail} 
                       alt={article.title} 
-                      className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 opacity-95 group-hover:opacity-100" 
+                      className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="absolute top-6 right-6">
-                       <span className={`px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest backdrop-blur-md border ${
-                         article.source === 'ET' 
-                           ? 'bg-vdas-orange/10 text-vdas-orange border-vdas-orange/20' 
-                           : 'bg-vdas-blue/10 text-vdas-blue border-vdas-blue/20'
-                       }`}>
-                         {article.source === 'ET' ? 'Economic Times' : 'NJ Wealth'}
+                       <span className="px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest backdrop-blur-md bg-white/20 text-white border border-white/30">
+                         {article.source === 'ET' ? 'Market Syndication' : 'Institutional'}
                        </span>
                     </div>
                   </a>
                   
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="text-[10px] font-black text-vdas-orange uppercase tracking-[0.25em] bg-vdas-orange/5 px-3 py-1 rounded-full border border-vdas-orange/10">
-                      {article.categories[0]}
-                    </span>
-                    <div className="w-1 h-1 rounded-full bg-slate-300" />
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{article.pubDate}</span>
+                  <div className="p-10 lg:p-12 flex flex-col flex-1">
+                    <div className="flex items-center gap-4 mb-6">
+                      <span className="text-[10px] font-black text-vdas-orange uppercase tracking-[0.25em] bg-vdas-orange/5 px-3 py-1 rounded-full border border-vdas-orange/10">
+                        {article.categories[0]}
+                      </span>
+                      <div className="w-1 h-1 rounded-full bg-slate-200" />
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{article.pubDate}</span>
+                    </div>
+
+                    <h3 className="text-2xl lg:text-3xl font-black text-slate-900 mb-6 leading-[1.2] group-hover:text-vdas-blue transition-colors font-heading tracking-tight">
+                      <a href={article.link} target="_blank" rel="noopener noreferrer">{article.title}</a>
+                    </h3>
+                    
+                    <p className="text-slate-500 text-base font-medium leading-relaxed mb-10 line-clamp-3">
+                      {article.description}
+                    </p>
+
+                    <a 
+                      href={article.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="mt-auto inline-flex items-center gap-3 text-[11px] font-black text-vdas-blue uppercase tracking-[0.3em] group/link w-fit"
+                    >
+                      Explore Analysis <span className="text-xl transition-transform group-hover/link:translate-x-2">→</span>
+                    </a>
                   </div>
-
-                  <h3 className="text-2xl lg:text-3xl font-black text-slate-900 mb-6 leading-[1.2] group-hover:text-vdas-blue transition-colors font-heading tracking-tighter">
-                    <a href={article.link} target="_blank" rel="noopener noreferrer">{article.title}</a>
-                  </h3>
-                  
-                  <p className="text-slate-500 text-base font-medium leading-relaxed mb-10 line-clamp-3">
-                    {article.description}
-                  </p>
-
-                  <a 
-                    href={article.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="mt-auto inline-flex items-center gap-3 text-[11px] font-black text-vdas-blue uppercase tracking-[0.3em] group/link w-fit border-b-2 border-transparent hover:border-vdas-blue transition-all pb-1"
-                  >
-                    Read Insight
-                    <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </a>
                 </motion.article>
               ))}
             </div>

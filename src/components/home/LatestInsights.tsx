@@ -213,7 +213,7 @@ export default function LatestInsights() {
             ))}
           </div>
         ) : (
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
             {articles.map((article, i) => (
               <motion.article 
                 key={article.link}
@@ -221,52 +221,48 @@ export default function LatestInsights() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group flex flex-col"
+                className="group flex flex-col h-full bg-white rounded-[2.5rem] border border-slate-100 hover:border-vdas-blue transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] overflow-hidden"
               >
                 <a 
                   href={article.link} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="block relative overflow-hidden rounded-[3rem] mb-8 aspect-[16/11] shadow-premium group-hover:shadow-2xl transition-all duration-700 bg-slate-50 border border-slate-100"
+                  className="block relative overflow-hidden aspect-[16/10]"
                 >
                   <img 
                     src={article.thumbnail} 
                     alt={article.title} 
-                    className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" 
+                    className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105" 
                   />
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest backdrop-blur-md border ${
-                      article.source === 'ET' 
-                        ? 'bg-vdas-orange/10 text-vdas-orange border-vdas-orange/20' 
-                        : 'bg-vdas-blue/10 text-vdas-blue border-vdas-blue/20'
-                    }`}>
-                      {article.source === 'ET' ? 'Economic Times' : 'NJ Wealth'}
+                  <div className="absolute top-4 right-4 z-10">
+                    <span className="px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest backdrop-blur-md bg-white/20 text-white border border-white/30">
+                      {article.source === 'ET' ? 'Market Intelligence' : 'Institutional'}
                     </span>
                   </div>
                 </a>
                 
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-[10px] font-black text-vdas-orange uppercase tracking-widest bg-vdas-orange/5 px-2 py-0.5 rounded-full">
-                    {article.category}
-                  </span>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{article.pubDate}</span>
+                <div className="p-8 lg:p-10 flex flex-col flex-1">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-[9px] font-black text-vdas-orange uppercase tracking-[0.2em]">
+                      {article.category}
+                    </span>
+                    <div className="w-1 h-1 rounded-full bg-slate-200" />
+                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{article.pubDate}</span>
+                  </div>
+
+                  <h3 className="text-xl lg:text-2xl font-black text-slate-900 mb-8 leading-tight group-hover:text-vdas-blue transition-colors font-heading tracking-tight line-clamp-2">
+                    <a href={article.link} target="_blank" rel="noopener noreferrer">{article.title}</a>
+                  </h3>
+
+                  <a 
+                    href={article.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="mt-auto inline-flex items-center gap-2 text-[10px] font-black text-vdas-blue uppercase tracking-[0.25em] group/link w-fit"
+                  >
+                    Read Insight <span className="text-lg transition-transform group-hover/link:translate-x-1.5">→</span>
+                  </a>
                 </div>
-
-                <h3 className="text-xl lg:text-2xl font-black text-slate-900 mb-6 leading-tight group-hover:text-vdas-blue transition-colors font-heading tracking-tighter line-clamp-2">
-                  <a href={article.link} target="_blank" rel="noopener noreferrer">{article.title}</a>
-                </h3>
-
-                <a 
-                  href={article.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center gap-2 text-[11px] font-black text-vdas-blue uppercase tracking-[0.2em] group/link w-fit"
-                >
-                  Read Insight
-                  <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </a>
               </motion.article>
             ))}
           </div>

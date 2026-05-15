@@ -90,25 +90,25 @@ export default function Navbar() {
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
-          ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.05)] py-2 border-b border-slate-100' 
-          : 'bg-white/95 backdrop-blur-md py-4'
+          ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.05)] py-2' 
+          : 'bg-white/95 backdrop-blur-md pt-2 pb-0'
       } ${mobileOpen ? 'opacity-0 lg:opacity-100' : 'opacity-100'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
 
             {/* Logo */}
-            <Link to="/" className="flex items-center group relative z-10">
+            <Link to="/" className="flex items-center group relative z-10 py-2">
               <motion.img 
-                animate={{ height: scrolled ? 48 : 64 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                animate={{ height: scrolled ? 40 : 50 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 src="/vdas_logo_new.png" 
                 alt="VDAS Financial Logo" 
-                className="w-auto object-contain"
+                className="w-auto object-contain mix-blend-multiply"
               />
             </Link>
-
+            
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-1 bg-slate-100/50 p-1.5 rounded-2xl border border-slate-200/50 backdrop-blur-sm">
+            <nav className="hidden lg:flex items-center gap-0.5 bg-slate-50/80 p-1.5 rounded-[1.25rem] border border-slate-200/60 backdrop-blur-md">
               {NAV_ITEMS.map((item) => {
                 const isActive = location.pathname === item.to || (item.children?.some(c => location.pathname === c.to));
                 
@@ -119,29 +119,29 @@ export default function Navbar() {
                     
                     {item.to ? (
                       <Link to={item.to}
-                        className={`relative px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${
+                        className={`relative px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-300 ${
                           isActive ? 'text-vdas-blue' : 'text-slate-500 hover:text-slate-900'
                         }`}>
                         <span className="relative z-10">{item.label}</span>
                         {isActive && (
                           <motion.div 
                             layoutId="nav-bg"
-                            className="absolute inset-0 bg-white shadow-sm rounded-xl"
-                            transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                            className="absolute inset-0 bg-white shadow-sm border border-slate-100 rounded-xl"
+                            transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
                           />
                         )}
                       </Link>
                     ) : (
                       <button
-                        className={`relative flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${
+                        className={`relative flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-300 ${
                           isActive || openMenu === item.label ? 'text-vdas-blue' : 'text-slate-500 hover:text-slate-900'
                         }`}>
                         <span className="relative z-10">{item.label}</span>
                         {(isActive || openMenu === item.label) && (
                           <motion.div 
                             layoutId="nav-bg"
-                            className="absolute inset-0 bg-white shadow-sm rounded-xl"
-                            transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                            className="absolute inset-0 bg-white shadow-sm border border-slate-100 rounded-xl"
+                            transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
                           />
                         )}
                         <svg className={`w-3 h-3 relative z-10 transition-transform duration-300 ${openMenu === item.label ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,36 +151,33 @@ export default function Navbar() {
                     )}
 
                     {/* Dropdown / Megamenu */}
-                    <AnimatePresence>
+                    <AnimatePresence mode="wait">
                       {item.children && openMenu === item.label && (
                         <motion.div
-                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          key={item.label}
+                          initial={{ opacity: 0, y: 15, scale: 0.98 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 8, scale: 0.98 }}
-                          transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                          className={`absolute top-full left-0 mt-3 bg-white/95 backdrop-blur-xl rounded-[2rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border border-slate-100 p-3 overflow-hidden ${
-                            item.label === 'Calculators' ? 'w-[540px]' : 'min-w-[260px]'
-                          }`}
+                          exit={{ opacity: 0, y: 10, scale: 0.99 }}
+                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                          className="absolute top-full left-0 pt-4 z-50"
                         >
-                          {/* Decorative accent */}
-                          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-vdas-blue via-vdas-orange to-vdas-blue opacity-20" />
-                          
-                          <div className={`grid ${item.label === 'Calculators' ? 'grid-cols-2' : 'grid-cols-1'} gap-1`}>
-                            {item.children.map((child: any) => (
-                              child.external ? (
-                                <a key={child.to} href={child.to} target="_blank" rel="noopener noreferrer"
-                                  className="flex items-center group/item px-5 py-3.5 rounded-xl text-[10px] font-black text-slate-500 hover:text-vdas-orange hover:bg-vdas-orange-light/50 transition-all">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-vdas-orange opacity-0 group-hover/item:opacity-100 mr-3 transition-all -translate-x-2 group-hover/item:translate-x-0" />
-                                  {child.label}
-                                </a>
-                              ) : (
-                                <Link key={child.to} to={child.to}
-                                  className="flex items-center group/item px-5 py-3.5 rounded-xl text-[10px] font-black text-slate-500 hover:text-vdas-blue hover:bg-vdas-blue-light/50 transition-all">
+                          <div className={`bg-white/98 backdrop-blur-3xl rounded-[2rem] shadow-[0_40px_100px_-15px_rgba(0,0,0,0.15)] border border-slate-200/50 p-2.5 overflow-hidden ${
+                            item.label === 'Calculators' ? 'w-[520px]' : 'min-w-[260px]'
+                          }`}>
+                            <div className={`grid ${item.label === 'Calculators' ? 'grid-cols-2' : 'grid-cols-1'} gap-0.5`}>
+                              {item.children.map((child: any) => (
+                                <Link 
+                                  key={child.to} 
+                                  to={child.to}
+                                  target={child.external ? "_blank" : undefined}
+                                  rel={child.external ? "noopener noreferrer" : undefined}
+                                  className="flex items-center group/item px-4 py-3 rounded-xl text-[10px] font-black text-slate-500 hover:text-vdas-blue hover:bg-slate-50 transition-all"
+                                >
                                   <div className="w-1.5 h-1.5 rounded-full bg-vdas-blue opacity-0 group-hover/item:opacity-100 mr-3 transition-all -translate-x-2 group-hover/item:translate-x-0" />
                                   {child.label}
                                 </Link>
-                              )
-                            ))}
+                              ))}
+                            </div>
                           </div>
                         </motion.div>
                       )}
@@ -193,9 +190,8 @@ export default function Navbar() {
             {/* Action */}
             <div className="hidden lg:flex items-center gap-4">
               <Link to="/contact"
-                className="group relative bg-vdas-blue-dark text-white px-8 py-3.5 rounded-2xl text-[10px] font-black uppercase tracking-widest overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-95">
-                <span className="relative z-10">Contact Us</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-vdas-blue to-vdas-blue-dark opacity-0 group-hover:opacity-100 transition-opacity" />
+                className="group relative bg-vdas-blue-dark text-white px-7 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest overflow-hidden transition-all duration-300 hover:shadow-xl hover:bg-vdas-blue">
+                <span className="relative z-10">Get Started</span>
               </Link>
             </div>
 

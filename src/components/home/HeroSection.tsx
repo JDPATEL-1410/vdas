@@ -120,7 +120,7 @@ export default function HeroSection() {
       </div>
 
       {/* ── Hero Content ── */}
-      <div className="flex-1 flex items-center pt-28 lg:pt-32 pb-10 relative z-10">
+      <div className="flex-1 flex items-center pt-32 lg:pt-32 pb-12 lg:pb-10 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
@@ -143,15 +143,15 @@ export default function HeroSection() {
                   {/* Heading */}
                   <h1 className="font-heading font-black tracking-tighter leading-[1.0] mb-6 text-center lg:text-left">
                     {/* Line 1 – blue */}
-                    <span className="block text-vdas-blue text-[2.2rem] sm:text-[3rem] lg:text-[3.8rem] xl:text-[4.5rem] font-display">
+                    <span className="block text-vdas-blue text-[2rem] sm:text-[3rem] lg:text-[3.8rem] xl:text-[4.5rem] font-display">
                       {slide.title}
                     </span>
-                    {/* Line 2 – orange with outline style */}
-                    <span className="block text-vdas-orange text-[2.8rem] sm:text-[3.8rem] lg:text-[4.8rem] xl:text-[5.5rem] -mt-2 font-display">
+                    {/* Line 2 – orange */}
+                    <span className="block text-vdas-orange text-[2.5rem] sm:text-[3.8rem] lg:text-[4.8rem] xl:text-[5.5rem] -mt-1 lg:-mt-2 font-display">
                       {slide.titleAccent}
                     </span>
-                    {/* Line 3 – dark slate, smaller */}
-                    <span className="block text-slate-800 text-[1.4rem] sm:text-[1.8rem] lg:text-[2.2rem] xl:text-[2.5rem] mt-1 font-bold tracking-normal">
+                    {/* Line 3 – dark slate */}
+                    <span className="block text-slate-800 text-[1.2rem] sm:text-[1.8rem] lg:text-[2.2rem] xl:text-[2.5rem] mt-2 font-bold tracking-normal">
                       {slide.titleLine3}
                     </span>
                   </h1>

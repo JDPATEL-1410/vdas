@@ -26,7 +26,7 @@ export default function PageHero({
   image,
 }: PageHeroProps) {
   return (
-    <section className="relative h-[55vh] min-h-[550px] flex items-center overflow-hidden bg-zinc-950 pt-32 lg:pt-40">
+    <section className="relative min-h-[450px] lg:h-[60vh] lg:min-h-[600px] flex items-center overflow-hidden bg-zinc-950 pt-32 pb-20 lg:pt-40 lg:pb-0">
       {/* Background with Dark Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {image ? (
