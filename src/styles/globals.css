@@ -10,9 +10,9 @@
   --color-vdas-white: #ffffff;
   --color-vdas-slate: #1a1a1a;
   
-  --font-heading: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --font-display: 'Instrument Serif', serif;
+  --font-display: 'Bricolage Grotesque', sans-serif;
   
   --shadow-premium: 0 20px 40px -15px rgba(0, 86, 179, 0.1);
   --shadow-orange: 0 20px 40px -15px rgba(255, 107, 0, 0.2);
@@ -39,7 +39,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -47,10 +47,10 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   line-height: 1.1;
   color: #0f172a;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 h1 { font-size: 3.5rem; }
@@ -59,7 +59,8 @@ h3 { font-size: 2rem; }
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
+  font-weight: 800;
 }
 
 /* Premium Utilities */

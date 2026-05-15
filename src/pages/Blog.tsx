@@ -94,9 +94,8 @@ const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET')
 
   // Fallback: Multiple CORS proxies if rss2json fails
   const proxies = [
-    `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-    `https://cors-anywhere.herokuapp.com/${url}`,
-    `https://corsproxy.io/?${encodeURIComponent(url)}`
+    `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
   ]
 
   let text = ''
@@ -104,7 +103,12 @@ const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET')
     try {
       const res = await fetch(proxy)
       if (res.ok) {
-        text = await res.text()
+        if (proxy.includes('allorigins')) {
+          const json = await res.json()
+          text = json.contents
+        } else {
+          text = await res.text()
+        }
         if (text && text.includes('<rss')) break
       }
     } catch (_) { continue }
@@ -222,9 +226,9 @@ export default function Blog() {
                 <div className="w-12 h-1.5 bg-vdas-orange rounded-full" />
                 <span className="text-vdas-orange text-[10px] font-black uppercase tracking-[0.4em]">Live Multi-Source Feed</span>
               </div>
-              <h2 className="text-4xl lg:text-6xl font-black text-vdas-blue-dark tracking-tighter leading-tight font-heading">
+              <h2 className="text-5xl lg:text-7xl font-black text-vdas-blue-dark tracking-tighter leading-[1.1] font-display">
                 Economic Times & <br />
-                <span className="text-vdas-blue">Market Insights.</span>
+                <span className="text-vdas-blue italic">Market Insights.</span>
               </h2>
             </div>
             

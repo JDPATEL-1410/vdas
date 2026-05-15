@@ -58,8 +58,8 @@ export default function LatestInsights() {
 
           // Fallback: CORS proxies
           const proxies = [
-            `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-            `https://corsproxy.io/?${encodeURIComponent(url)}`
+            `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
           ]
           
           let text = ""
@@ -67,7 +67,12 @@ export default function LatestInsights() {
             try {
               const response = await fetch(proxy)
               if (response.ok) {
-                text = await response.text()
+                if (proxy.includes('allorigins')) {
+                  const json = await response.json()
+                  text = json.contents
+                } else {
+                  text = await response.text()
+                }
                 if (text && text.includes('<rss')) break
               }
             } catch (e) { continue }
@@ -143,8 +148,8 @@ export default function LatestInsights() {
               <div className="w-12 h-1.5 bg-vdas-orange rounded-full" />
               <span className="text-vdas-orange text-[10px] font-black uppercase tracking-[0.4em]">Live Intelligence</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-black text-vdas-blue-dark tracking-tighter leading-tight font-heading">
-              Latest <span className="text-vdas-blue">Financial Insights.</span>
+            <h2 className="text-5xl lg:text-7xl font-black text-vdas-blue-dark tracking-tighter leading-[1.1] font-display">
+              Latest <span className="text-vdas-blue italic">Financial Insights.</span>
             </h2>
           </div>
           <Link to="/blog" className="inline-flex items-center gap-3 text-[11px] font-black text-vdas-blue uppercase tracking-[0.3em] group hover:text-vdas-orange transition-colors">
