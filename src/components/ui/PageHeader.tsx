@@ -8,12 +8,14 @@ interface Breadcrumb {
 
 interface PageHeaderProps {
   title: string
+  titleAccent?: string
   subtitle?: string
   image: string
   breadcrumbs?: Breadcrumb[]
+  badge?: string
 }
 
-export default function PageHeader({ title, subtitle, image, breadcrumbs }: PageHeaderProps) {
+export default function PageHeader({ title, titleAccent, subtitle, image, breadcrumbs, badge }: PageHeaderProps) {
   return (
     <section className="relative min-h-[500px] lg:h-[60vh] lg:min-h-[600px] flex items-center overflow-hidden bg-zinc-950 pt-32 pb-20 lg:pt-40 lg:pb-0">
       {/* Background Image Container */}
@@ -66,7 +68,7 @@ export default function PageHeader({ title, subtitle, image, breadcrumbs }: Page
             <div className="flex items-center gap-4 mb-10">
               <div className="w-16 h-1 bg-vdas-orange rounded-full shadow-[0_0_20px_rgba(255,107,0,0.5)]" />
               <span className="text-white text-[11px] font-black uppercase tracking-[0.6em]">
-                Institutional Grade
+                {badge || 'Institutional Grade'}
               </span>
             </div>
 
@@ -74,6 +76,9 @@ export default function PageHeader({ title, subtitle, image, breadcrumbs }: Page
               <div className="lg:col-span-8">
                 <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black !text-white tracking-tighter leading-[1.1] mb-2 font-heading">
                   {title}
+                  {titleAccent && (
+                    <span className="block text-vdas-orange mt-2 font-display">{titleAccent}</span>
+                  )}
                 </h1>
               </div>
 

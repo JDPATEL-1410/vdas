@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageSEO from '../components/ui/PageSEO'
+import PageHeader from '../components/ui/PageHeader'
 
 interface LegalPageProps { 
   title: string; 
@@ -15,42 +16,13 @@ export function LegalPage({ title, seoTitle, lastUpdated, image, children }: Leg
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <PageSEO title={`${seoTitle} | VDAS Financial`} description={`${title} for VDAS Financial — Vishwas Deshpande Associates.`} />
       
-      {/* Premium Legal Header */}
-      <div className="relative h-[55vh] min-h-[500px] flex items-center overflow-hidden bg-zinc-950 pt-24 lg:pt-32">
-        {/* Background Image Container */}
-        <div className="absolute inset-0 z-0">
-          <motion.img
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover opacity-60"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-zinc-950/40 to-zinc-950" />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl backdrop-blur-3xl bg-white/[0.03] border border-white/10 rounded-[3.5rem] p-10 lg:p-14 shadow-2xl"
-          >
-            <nav className="flex items-center gap-2 text-[10px] font-black text-white/50 uppercase tracking-[0.4em] mb-6">
-              <Link to="/" className="hover:text-vdas-orange transition-colors">Home</Link>
-              <span className="opacity-30">/</span>
-              <span className="text-white">Legal</span>
-              <span className="opacity-30">/</span>
-              <span className="text-vdas-orange">{title}</span>
-            </nav>
-            <h1 className="text-4xl lg:text-7xl font-black !text-white tracking-tighter leading-tight mb-6 font-heading">{title}</h1>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-1 bg-vdas-orange rounded-full shadow-[0_0_15px_rgba(255,107,0,0.4)]" />
-              <p className="text-white/40 text-[10px] font-black uppercase tracking-widest">Version 2.2 • Last Modified {lastUpdated}</p>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+      <PageHeader 
+        title={title}
+        subtitle={`Version 2.2 • Last Modified ${lastUpdated}`}
+        image={image}
+        breadcrumbs={[{ label: 'Legal', to: '/legal' }, { label: title }]}
+        badge="Institutional Compliance"
+      />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="prose prose-slate prose-lg max-w-none 

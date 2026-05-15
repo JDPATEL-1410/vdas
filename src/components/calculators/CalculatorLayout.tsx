@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import PageHero from '../ui/PageHero'
+import PageHeader from '../ui/PageHeader'
 
 interface RelatedCalc {
   title: string
@@ -42,15 +42,13 @@ export default function CalculatorLayout({
       exit={{ opacity: 0 }}
       className="bg-white min-h-screen"
     >
-      <PageHero
-        eyebrow={eyebrow}
+      <PageHeader
+        badge={eyebrow}
         title={title}
         titleAccent={titleAccent}
-        description={description}
+        subtitle={description}
         breadcrumbs={[{ label: 'Calculators', to: '/calculators' }, { label: title }]}
-        compact
-        image={image}
-        accentColor={accentColor}
+        image={image || '/financial_freedom_family_1778479843533.png'}
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

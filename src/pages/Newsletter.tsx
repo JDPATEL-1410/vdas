@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import PageSEO from '../components/ui/PageSEO'
-import PageHero from '../components/ui/PageHero'
+import PageHeader from '../components/ui/PageHeader'
 
 const RECENT_NEWSLETTERS = [
   { month: 'April 2026', title: 'Navigating Volatility', desc: 'Strategic insights for high-net-worth families in the current market cycle.', link: '#' },
@@ -21,10 +21,10 @@ export default function Newsletter() {
         description="Subscribe to VDAS monthly financial newsletter — market updates, tax tips, and investment ideas delivered to your inbox." 
       />
       
-      <PageHero 
+      <PageHeader 
         title="Institutional Wisdom."
         titleAccent="Monthly."
-        description="Join our inner circle of informed investors who receive our curated market intelligence and strategic insights delivered directly to their inbox."
+        subtitle="Join our inner circle of informed investors who receive our curated market intelligence and strategic insights delivered directly to their inbox."
         image="/financial_newsletter_tablet_1778481209762.png"
         badge="Strategic Intelligence"
         breadcrumbs={[{ label: 'Newsletter' }]}
