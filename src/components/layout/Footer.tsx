@@ -44,14 +44,10 @@ const REGULATORS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-slate-200 pt-32 pb-16 font-body relative overflow-hidden">
-      {/* Structural Background Accents */}
-      <div className="absolute top-0 left-1/4 w-px h-full bg-slate-100 hidden lg:block" />
-      <div className="absolute top-0 left-2/4 w-px h-full bg-slate-100 hidden lg:block" />
-      <div className="absolute top-0 left-3/4 w-px h-full bg-slate-100 hidden lg:block" />
-      
+    <footer className="bg-white border-t border-slate-200 pt-32 pb-12 font-body relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Top Section: Brand & Identity */}
+        
+        {/* ── Top Block: Primary Navigation ── */}
         <div className="grid lg:grid-cols-12 gap-16 mb-24 items-start">
           <div className="lg:col-span-4 space-y-12">
             <Link to="/" className="inline-block group">
@@ -67,11 +63,10 @@ export default function Footer() {
                 <span className="text-vdas-orange italic">Preserving Legacies.</span>
               </h3>
               <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-sm">
-                Vishwas Deshpande Associates provides institutional-grade wealth advisory and systematic investment frameworks for India's elite families since 1991.
+                Vishwas Deshpande Associates provides institutional-grade wealth advisory and systematic investment frameworks since 1991.
               </p>
             </div>
             
-            {/* AMFI Registry - Enhanced Structure */}
             <div className="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-200/60 shadow-sm inline-flex items-center gap-6">
               <div className="w-16 h-16 bg-vdas-blue rounded-2xl flex items-center justify-center text-white font-black text-xs shadow-xl shadow-vdas-blue/20">AMFI</div>
               <div>
@@ -81,7 +76,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Links Grid - Structured in 3 distinct columns */}
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-16 lg:pl-20">
             <div className="space-y-10">
               <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-vdas-orange">Solutions</h4>
@@ -108,7 +102,7 @@ export default function Footer() {
               </ul>
             </div>
             <div className="space-y-10">
-              <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-vdas-orange">Connect</h4>
+              <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-vdas-orange">Corporate</h4>
               <ul className="space-y-5">
                 {CORPORATE.map(l => (
                   <li key={l.label}>
@@ -128,56 +122,57 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Regulatory & Trust Section - Highly Structured */}
-        <div className="border-t border-slate-100 py-20">
-          <div className="grid lg:grid-cols-12 gap-16 items-start">
-            <div className="lg:col-span-5 space-y-8">
-              <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.5em]">Regulatory Governance</p>
+        {/* ── Unified Compliance & Social Block ── */}
+        <div className="bg-slate-50 rounded-[3rem] p-10 lg:p-16 border border-slate-100 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-vdas-orange/5 rounded-full blur-[100px]" />
+          
+          <div className="relative z-10 space-y-16">
+            {/* Tier 1: Regulators */}
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+              <h5 className="text-[11px] font-black text-slate-900 uppercase tracking-[0.5em] flex-shrink-0">Regulatory Governance</h5>
               <div className="flex flex-wrap gap-3">
                 {REGULATORS.map(r => (
                   <a key={r.label} href={r.href} target="_blank" rel="noopener noreferrer" 
-                     className="px-5 py-2.5 rounded-xl bg-slate-50 border border-slate-200/60 text-[10px] font-black text-slate-500 hover:border-vdas-blue hover:text-vdas-blue hover:bg-white transition-all uppercase tracking-widest">
+                     className="px-5 py-2.5 rounded-xl bg-white border border-slate-200 text-[10px] font-black text-slate-500 hover:border-vdas-blue hover:text-vdas-blue transition-all uppercase tracking-widest">
                     {r.label}
                   </a>
                 ))}
               </div>
             </div>
-            <div className="lg:col-span-7">
-              <div className="bg-slate-50 rounded-[3rem] p-10 border border-slate-100 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-vdas-orange/5 rounded-full blur-[80px] group-hover:bg-vdas-orange/10 transition-colors duration-700" />
-                <p className="text-[12px] leading-relaxed text-slate-400 font-medium italic relative z-10">
-                  <span className="block text-[11px] font-black text-vdas-orange uppercase tracking-[0.4em] mb-4 not-italic">Statutory Warning & Global Disclosure:</span>
-                  Investments in Mutual Funds are subject to market risks. Please read all scheme related documents carefully before investing. Mutual Fund schemes do not assure or guarantee any returns. Past performance may or may not be sustained in the future. VDAS operates as a Regular Distributor (ARN-90854) and receives trailing commission from AMCs. 
-                </p>
+
+            {/* Tier 2: Disclosure */}
+            <p className="text-[13px] leading-relaxed text-slate-400 font-medium italic border-y border-slate-200/60 py-10">
+              <span className="block text-[11px] font-black text-vdas-orange uppercase tracking-[0.4em] mb-4 not-italic">Statutory Warning & Global Disclosure:</span>
+              Investments in Mutual Funds are subject to market risks. Please read all scheme related documents carefully before investing. Mutual Fund schemes do not assure or guarantee any returns. Past performance may or may not be sustained in the future. VDAS operates as a Regular Distributor (ARN-90854) and receives trailing commission from AMCs.
+            </p>
+
+            {/* Tier 3: Legal & Social & Credits */}
+            <div className="grid lg:grid-cols-2 gap-12 items-end">
+              <div className="flex flex-wrap gap-x-8 gap-y-4">
+                {LEGAL.map(l => (
+                  l.external ? (
+                    <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="text-[11px] font-black text-slate-500 hover:text-vdas-blue transition-colors uppercase tracking-[0.3em]">{l.label}</a>
+                  ) : (
+                    <Link key={l.label} to={l.to!} className="text-[11px] font-black text-slate-500 hover:text-vdas-blue transition-colors uppercase tracking-[0.3em]">{l.label}</Link>
+                  )
+                ))}
+              </div>
+
+              <div className="flex flex-col md:flex-row items-center lg:justify-end gap-10">
+                <div className="flex items-center gap-6">
+                   <a href="https://facebook.com/people/Vishwas-Deshpande/61575131799781/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-vdas-blue transition-colors font-black text-[11px] tracking-widest">FB</a>
+                   <a href="https://instagram.com/vvd_officials" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-vdas-blue transition-colors font-black text-[11px] tracking-widest">IG</a>
+                   <a href="https://wa.me/919822000000" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-vdas-blue transition-colors font-black text-[11px] tracking-widest">WA</a>
+                </div>
+                <div className="text-center md:text-right">
+                  <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em] mb-1">© {new Date().getFullYear()} VDAS FINANCIAL</p>
+                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.4em]">Design by <a href="https://ainatech.in" target="_blank" rel="noopener noreferrer" className="text-vdas-blue hover:text-vdas-orange transition-colors">AINATECH</a></p>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar: Legal & Social */}
-        <div className="pt-12 border-t border-slate-100 flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-4">
-            {LEGAL.map(l => (
-              l.external ? (
-                <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="text-[11px] font-black text-slate-400 hover:text-vdas-blue transition-colors uppercase tracking-[0.3em]">{l.label}</a>
-              ) : (
-                <Link key={l.label} to={l.to!} className="text-[11px] font-black text-slate-400 hover:text-vdas-blue transition-colors uppercase tracking-[0.3em]">{l.label}</Link>
-              )
-            ))}
-          </div>
-          
-          <div className="flex items-center gap-6">
-             <div className="flex items-center gap-4 border-r border-slate-100 pr-8">
-                <a href="https://facebook.com/people/Vishwas-Deshpande/61575131799781/" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-vdas-blue transition-colors"><span className="text-[11px] font-black uppercase tracking-widest">FB</span></a>
-                <a href="https://instagram.com/vvd_officials" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-vdas-blue transition-colors"><span className="text-[11px] font-black uppercase tracking-widest">IG</span></a>
-                <a href="https://wa.me/919822000000" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-vdas-blue transition-colors"><span className="text-[11px] font-black uppercase tracking-widest">WA</span></a>
-             </div>
-             <div className="text-right">
-                <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em] mb-1">© {new Date().getFullYear()} VDAS FINANCIAL</p>
-                <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.4em]">Design by <a href="https://ainatech.in" target="_blank" rel="noopener noreferrer" className="text-vdas-blue hover:text-vdas-orange transition-colors">AINATECH</a></p>
-             </div>
-          </div>
-        </div>
       </div>
     </footer>
   )
