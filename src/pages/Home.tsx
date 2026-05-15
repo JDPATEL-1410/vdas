@@ -6,7 +6,6 @@ import ProductTabs from '../components/home/ProductTabs'
 import SIPWidget from '../components/home/SIPWidget'
 import LatestInsights from '../components/home/LatestInsights'
 import TestimonialSlider from '../components/home/TestimonialSlider'
-import CTABanner from '../components/home/CTABanner'
 import PageSEO from '../components/ui/PageSEO'
 
 export default function Home() {
@@ -38,10 +37,7 @@ export default function Home() {
         <ProductTabs />
       </div>
       
-      {/* 5. SIP Calculator — interactive engagement */}
-      <div className="bg-white">
-        <SIPWidget />
-      </div>
+
       
       {/* 6. Latest Insights — daily news */}
       <LatestInsights />
@@ -49,8 +45,7 @@ export default function Home() {
       {/* 7. Testimonials — social proof */}
       <TestimonialSlider />
       
-      {/* 8. CTA — conversion */}
-      <CTABanner />
+
     </motion.div>
   )
 }

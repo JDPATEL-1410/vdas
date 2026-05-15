@@ -119,7 +119,7 @@ export default function Navbar() {
                     
                     {item.to ? (
                       <Link to={item.to}
-                        className={`relative px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-300 ${
+                        className={`relative px-4 py-2.5 rounded-xl text-[12px] font-black uppercase tracking-[0.15em] transition-all duration-300 ${
                           isActive ? 'text-vdas-blue' : 'text-slate-500 hover:text-slate-900'
                         }`}>
                         <span className="relative z-10">{item.label}</span>
@@ -133,7 +133,7 @@ export default function Navbar() {
                       </Link>
                     ) : (
                       <button
-                        className={`relative flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-300 ${
+                        className={`relative flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-[12px] font-black uppercase tracking-[0.15em] transition-all duration-300 ${
                           isActive || openMenu === item.label ? 'text-vdas-blue' : 'text-slate-500 hover:text-slate-900'
                         }`}>
                         <span className="relative z-10">{item.label}</span>
@@ -258,7 +258,7 @@ export default function Navbar() {
                       <div className="space-y-2">
                         <button 
                           onClick={() => setMobileExpanded(mobileExpanded === item.label ? null : item.label)}
-                          className={`w-full flex items-center justify-between px-6 py-4 rounded-[1.5rem] text-[14px] font-black uppercase tracking-[0.15em] transition-all ${
+                          className={`w-full flex items-center justify-between px-6 py-4 rounded-[1.5rem] text-[16px] font-black uppercase tracking-[0.15em] transition-all ${
                             mobileExpanded === item.label ? 'bg-slate-900 text-white shadow-xl' : 'text-slate-600 hover:bg-slate-50'
                           }`}
                         >
@@ -284,7 +284,7 @@ export default function Navbar() {
                                       href={child.to} 
                                       target="_blank" 
                                       rel="noopener noreferrer" 
-                                      className="block px-6 py-3.5 text-[12px] font-bold text-slate-500 hover:text-vdas-orange active:bg-vdas-orange-light/50 rounded-xl transition-all"
+                                      className="block px-6 py-3.5 text-[14px] font-bold text-slate-500 hover:text-vdas-orange active:bg-vdas-orange-light/50 rounded-xl transition-all"
                                     >
                                       {child.label}
                                     </a>
@@ -292,7 +292,7 @@ export default function Navbar() {
                                     <Link 
                                       key={child.to} 
                                       to={child.to} 
-                                      className={`block px-6 py-3.5 text-[12px] font-bold rounded-xl transition-all ${
+                                      className={`block px-6 py-3.5 text-[14px] font-bold rounded-xl transition-all ${
                                         location.pathname === child.to 
                                           ? 'text-vdas-blue bg-white shadow-sm' 
                                           : 'text-slate-500 hover:text-vdas-blue hover:bg-white/50'

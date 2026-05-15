@@ -107,29 +107,7 @@ export default function WhyVDAS() {
           ))}
         </div>
 
-        {/* ── Institutional Trust Bar ── */}
-        <div className="mt-32">
-          <hr className="border-slate-100 mb-20" />
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-            <div className="max-w-sm text-center lg:text-left flex-shrink-0">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-4">Strategic Partners</p>
-              <h4 className="text-2xl font-black text-vdas-blue-dark tracking-tight">Access to India's leading financial institutions.</h4>
-            </div>
-            
-            <div className="flex-1 overflow-hidden relative">
-              <div className="flex gap-20 animate-marquee whitespace-nowrap py-4">
-                {[...['HDFC Bank', 'ICICI Prudential', 'SBI Mutual Fund', 'Kotak', 'Axis Bank', 'Nippon India', 'Tata Mutual Fund', 'DSP Mutual Fund'], ...['HDFC Bank', 'ICICI Prudential', 'SBI Mutual Fund', 'Kotak', 'Axis Bank', 'Nippon India', 'Tata Mutual Fund', 'DSP Mutual Fund']].map((brand, idx) => (
-                  <span key={`${brand}-${idx}`} className="text-2xl font-black text-slate-300 uppercase tracking-[0.2em] hover:text-vdas-blue transition-colors cursor-default select-none">
-                    {brand}
-                  </span>
-                ))}
-              </div>
-              {/* Fade masks */}
-              <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
-              <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
   )
