@@ -77,23 +77,15 @@ const TICKER_ITEMS = [
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0)
-  const [progress, setProgress] = useState(0)
 
   const nextSlide = useCallback(() => {
     setCurrent((prev) => (prev + 1) % SLIDES.length)
-    setProgress(0)
   }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          nextSlide()
-          return 0
-        }
-        return prev + 100 / 70 // ~7s total
-      })
-    }, 100)
+      nextSlide()
+    }, 7000) // 7s total
     return () => clearInterval(interval)
   }, [nextSlide])
 
@@ -240,55 +232,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Bottom Slide Controls & Progress ── */}
-      <div className="relative z-10 pb-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-8">
 
-            {/* Slide Thumbnails */}
-            <div className="flex items-center gap-4">
-              {SLIDES.map((s, i) => (
-                <button
-                  key={s.id}
-                  onClick={() => { setCurrent(i); setProgress(0) }}
-                  className={`relative flex items-center gap-3 transition-all duration-300 rounded-2xl px-4 py-3 ${
-                    i === current
-                      ? 'bg-vdas-blue text-white shadow-lg shadow-vdas-blue/30'
-                      : 'bg-slate-50 border border-slate-200 text-slate-400 hover:border-vdas-blue hover:text-vdas-blue'
-                  }`}
-                >
-                  <div className={`w-2 h-2 rounded-full flex-shrink-0 ${i === current ? 'bg-vdas-orange' : 'bg-slate-300'}`} />
-                  <span className="text-[10px] font-black uppercase tracking-widest hidden sm:block">
-                    {s.badge.split(' ')[0]}
-                  </span>
-                  {/* Progress bar */}
-                  {i === current && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-vdas-blue/20 overflow-hidden">
-                      <motion.div
-                        className="h-full bg-vdas-orange rounded-full"
-                        style={{ width: `${progress}%` }}
-                      />
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {/* Scroll Down hint */}
-            <div className="hidden lg:flex items-center gap-3 text-slate-300">
-              <div className="w-6 h-10 border-2 border-slate-200 rounded-full flex items-start justify-center pt-1.5">
-                <motion.div
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.8 }}
-                  className="w-1.5 h-1.5 bg-vdas-orange rounded-full"
-                />
-              </div>
-              <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400">Scroll Down</span>
-            </div>
-
-          </div>
-        </div>
-      </div>
 
       {/* ── Marquee CSS ── */}
       <style>{`
