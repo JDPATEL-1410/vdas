@@ -71,164 +71,164 @@ const SOCIAL_LINKS = [
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.396.015 12.03c0 2.12.554 4.189 1.604 6.04L0 24l6.104-1.602a11.803 11.803 0 005.94 1.597h.005c6.634 0 12.031-5.397 12.034-12.03a11.75 11.75 0 00-3.483-8.528z"/>
-73:       </svg>
-74:     )
-75:   }
-76: ]
-77: 
-78: export default function Footer() {
-79:   return (
-80:     <footer className="bg-white border-t border-slate-200 pt-32 pb-12 font-body relative overflow-hidden">
-81:       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-82:         
-83:         {/* ── Top Block: Primary Navigation ── */}
-84:         <div className="grid lg:grid-cols-12 gap-16 mb-24 items-start">
-85:           <div className="lg:col-span-4 space-y-12">
-86:             <Link to="/" className="inline-block group">
-87:               <img
-88:                 src="/vdas_logo_new.png"
-89:                 alt="VDAS Financial"
-90:                 className="h-24 w-auto object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
-91:               />
-92:             </Link>
-93:             <div className="space-y-6">
-94:               <h3 className="text-2xl font-black text-vdas-blue-dark tracking-tight leading-tight">
-95:                 Architecting Wealth. <br />
-96:                 <span className="text-vdas-orange italic">Preserving Legacies.</span>
-97:               </h3>
-98:               <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-sm">
-99:                 Institutional-grade wealth advisory and systematic investment frameworks since 1991. Serving India's elite families with integrity.
-100:               </p>
-101:               {/* Registered Office Address - SEBI Compliance */}
-102:               <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
-103:                 Registered Office:<br />
-104:                 102, Business Square, Andheri West, Mumbai 400053
-105:               </p>
-106:             </div>
-107:             
-108:             {/* Social Icons */}
-109:             <div className="flex items-center gap-4 pt-4">
-110:               {SOCIAL_LINKS.map(s => (
-111:                 <a 
-112:                   key={s.label} 
-113:                   href={s.href} 
-114:                   target="_blank" 
-115:                   rel="noopener noreferrer" 
-116:                   className={`w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-white hover:shadow-xl transition-all duration-500 group ${s.hoverClass}`}
-117:                   title={s.label}
-118:                 >
-119:                   <div className="group-hover:scale-110 transition-transform duration-500">
-120:                     {s.icon}
-121:                   </div>
-122:                 </a>
-123:               ))}
-124:             </div>
-125: 
-126:             <div className="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-200/60 shadow-sm inline-flex items-center gap-6">
-127:               <div className="w-16 h-16 bg-vdas-blue rounded-2xl flex items-center justify-center text-white font-black text-xs shadow-xl shadow-vdas-blue/20">AMFI</div>
-128:               <div>
-129:                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-1">Registered Distributor</p>
-130:                 <p className="text-xl font-black text-vdas-blue-dark uppercase tracking-tighter">ARN-90854</p>
-131:               </div>
-132:             </div>
-133:           </div>
-134: 
-135:           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-16 lg:pl-20">
-136:             <div className="space-y-10">
-137:               <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-vdas-orange">Solutions</h4>
-138:               <ul className="space-y-5">
-139:                 {SOLUTIONS.map(l => (
-140:                   <li key={l.label}>
-141:                     <Link to={l.to} className="text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
-142:                       {l.label}
-143:                     </Link>
-144:                   </li>
-145:                 ))}
-146:               </ul>
-147:             </div>
-148:             <div className="space-y-10">
-149:               <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-vdas-orange">Calculators</h4>
-150:               <ul className="space-y-5">
-151:                 {CALCULATORS.map(l => (
-152:                   <li key={l.label}>
-153:                     <Link to={l.to} className="text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
-154:                       {l.label}
-155:                     </Link>
-156:                   </li>
-157:                 ))}
-158:               </ul>
-159:             </div>
-160:             <div className="space-y-10">
-161:               <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-vdas-orange">Corporate</h4>
-162:               <ul className="space-y-5">
-163:                 {CORPORATE.map(l => (
-164:                   <li key={l.label}>
-165:                     <Link to={l.to} className="text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
-166:                       {l.label}
-167:                     </Link>
-168:                   </li>
-169:                 ))}
-170:                 <li>
-171:                   <a href="https://ewa.njindiaonline.com" target="_blank" rel="noopener noreferrer" 
-172:                      className="inline-flex items-center gap-2 bg-vdas-blue text-white px-6 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-vdas-orange transition-all shadow-lg shadow-vdas-blue/20">
-173:                     Client Login
-174:                   </a>
-175:                 </li>
-176:               </ul>
-177:             </div>
-178:           </div>
-179:         </div>
-180: 
-181:         {/* ── Unified Compliance Section ── */}
-182:         <div className="bg-slate-50 rounded-[3rem] p-10 lg:p-16 border border-slate-100 relative overflow-hidden">
-183:           <div className="absolute top-0 right-0 w-64 h-64 bg-vdas-orange/5 rounded-full blur-[100px]" />
-184:           
-185:           <div className="relative z-10 space-y-16">
-186:             {/* Tier 1: Regulators */}
-187:             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-188:               <h5 className="text-[11px] font-black text-slate-900 uppercase tracking-[0.5em] flex-shrink-0">Regulatory Governance</h5>
-189:               <div className="flex flex-wrap gap-3">
-190:                 {REGULATORS.map(r => (
-191:                   <a key={r.label} href={r.href} target="_blank" rel="noopener noreferrer" 
-192:                      className="px-5 py-2.5 rounded-xl bg-white border border-slate-200 text-[10px] font-black text-slate-500 hover:border-vdas-blue hover:text-vdas-blue transition-all uppercase tracking-widest">
-193:                     {r.label}
-194:                   </a>
-195:                 ))}
-196:               </div>
-197:             </div>
-198: 
-199:             {/* Tier 2: Disclosure */}
-200:             <div className="border-y border-slate-200/60 py-10 space-y-6">
-201:               <p className="text-[13px] leading-relaxed text-slate-400 font-medium italic">
-202:                 <span className="block text-[11px] font-black text-vdas-orange uppercase tracking-[0.4em] mb-4 not-italic">Statutory Warning & Global Disclosure:</span>
-203:                 Investments in Mutual Funds are subject to market risks. Please read all scheme related documents carefully before investing. Mutual Fund schemes do not assure or guarantee any returns. Past performance may or may not be sustained in the future.
-204:               </p>
-205:               <p className="text-[12px] leading-relaxed text-slate-400 font-medium italic">
-206:                 Vishwas Deshpande Associates (VDAS) operates as a Regular Mutual Fund Distributor (ARN-90854) and receives trailing commission from AMCs for the services rendered. Registration granted by SEBI, membership of AMFI and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors.
-207:               </p>
-208:             </div>
-209: 
-210:             {/* Tier 3: Legal & Credits */}
-211:             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 pt-4">
-212:               <div className="flex flex-wrap justify-center lg:justify-start gap-x-8 gap-y-4">
-213:                 {LEGAL.map(l => (
-214:                   l.external ? (
-215:                     <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="text-[11px] font-black text-slate-500 hover:text-vdas-blue transition-colors uppercase tracking-[0.3em]">{l.label}</a>
-216:                   ) : (
-217:                     <Link key={l.label} to={l.to!} className="text-[11px] font-black text-slate-500 hover:text-vdas-blue transition-colors uppercase tracking-[0.3em]">{l.label}</Link>
-218:                   )
-219:                 ))}
-220:               </div>
-221: 
-222:               <div className="text-center lg:text-right">
-223:                 <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em] mb-1">© {new Date().getFullYear()} VDAS FINANCIAL · AMFI REGISTERED MUTUAL FUND DISTRIBUTOR</p>
-224:                 <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.4em]">Design by <a href="https://ainatech.in" target="_blank" rel="noopener noreferrer" className="text-vdas-blue hover:text-vdas-orange transition-colors">AINATECH</a></p>
-225:               </div>
-226:             </div>
-227:           </div>
-228:         </div>
-229: 
-230:       </div>
-231:     </footer>
-232:   )
-233: }
+      </svg>
+    )
+  }
+]
+
+export default function Footer() {
+  return (
+    <footer className="bg-white border-t border-slate-200 pt-32 pb-12 font-body relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* ── Top Block: Primary Navigation ── */}
+        <div className="grid lg:grid-cols-12 gap-16 mb-24 items-start">
+          <div className="lg:col-span-4 space-y-12">
+            <Link to="/" className="inline-block group">
+              <img
+                src="/vdas_logo_new.png"
+                alt="VDAS Financial"
+                className="h-24 w-auto object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+              />
+            </Link>
+            <div className="space-y-6">
+              <h3 className="text-2xl font-black text-vdas-blue-dark tracking-tight leading-tight">
+                Architecting Wealth. <br />
+                <span className="text-vdas-orange italic">Preserving Legacies.</span>
+              </h3>
+              <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-sm">
+                Institutional-grade wealth advisory and systematic investment frameworks since 1991. Serving India's elite families with integrity.
+              </p>
+              {/* Registered Office Address - SEBI Compliance */}
+              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
+                Registered Office:<br />
+                102, Business Square, Andheri West, Mumbai 400053
+              </p>
+            </div>
+            
+            {/* Social Icons */}
+            <div className="flex items-center gap-4 pt-4">
+              {SOCIAL_LINKS.map(s => (
+                <a 
+                  key={s.label} 
+                  href={s.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={`w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-white hover:shadow-xl transition-all duration-500 group ${s.hoverClass}`}
+                  title={s.label}
+                >
+                  <div className="group-hover:scale-110 transition-transform duration-500">
+                    {s.icon}
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            <div className="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-200/60 shadow-sm inline-flex items-center gap-6">
+              <div className="w-16 h-16 bg-vdas-blue rounded-2xl flex items-center justify-center text-white font-black text-xs shadow-xl shadow-vdas-blue/20">AMFI</div>
+              <div>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-1">Registered Distributor</p>
+                <p className="text-xl font-black text-vdas-blue-dark uppercase tracking-tighter">ARN-90854</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-16 lg:pl-20">
+            <div className="space-y-10">
+              <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-vdas-orange">Solutions</h4>
+              <ul className="space-y-5">
+                {SOLUTIONS.map(l => (
+                  <li key={l.label}>
+                    <Link to={l.to} className="text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="space-y-10">
+              <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-vdas-orange">Calculators</h4>
+              <ul className="space-y-5">
+                {CALCULATORS.map(l => (
+                  <li key={l.label}>
+                    <Link to={l.to} className="text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="space-y-10">
+              <h4 className="text-[11px] font-black uppercase tracking-[0.5em] text-vdas-orange">Corporate</h4>
+              <ul className="space-y-5">
+                {CORPORATE.map(l => (
+                  <li key={l.label}>
+                    <Link to={l.to} className="text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <a href="https://ewa.njindiaonline.com" target="_blank" rel="noopener noreferrer" 
+                     className="inline-flex items-center gap-2 bg-vdas-blue text-white px-6 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-vdas-orange transition-all shadow-lg shadow-vdas-blue/20">
+                    Client Login
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Unified Compliance Section ── */}
+        <div className="bg-slate-50 rounded-[3rem] p-10 lg:p-16 border border-slate-100 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-vdas-orange/5 rounded-full blur-[100px]" />
+          
+          <div className="relative z-10 space-y-16">
+            {/* Tier 1: Regulators */}
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+              <h5 className="text-[11px] font-black text-slate-900 uppercase tracking-[0.5em] flex-shrink-0">Regulatory Governance</h5>
+              <div className="flex flex-wrap gap-3">
+                {REGULATORS.map(r => (
+                  <a key={r.label} href={r.href} target="_blank" rel="noopener noreferrer" 
+                     className="px-5 py-2.5 rounded-xl bg-white border border-slate-200 text-[10px] font-black text-slate-500 hover:border-vdas-blue hover:text-vdas-blue transition-all uppercase tracking-widest">
+                    {r.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Tier 2: Disclosure */}
+            <div className="border-y border-slate-200/60 py-10 space-y-6">
+              <p className="text-[13px] leading-relaxed text-slate-400 font-medium italic">
+                <span className="block text-[11px] font-black text-vdas-orange uppercase tracking-[0.4em] mb-4 not-italic">Statutory Warning & Global Disclosure:</span>
+                Investments in Mutual Funds are subject to market risks. Please read all scheme related documents carefully before investing. Mutual Fund schemes do not assure or guarantee any returns. Past performance may or may not be sustained in the future.
+              </p>
+              <p className="text-[12px] leading-relaxed text-slate-400 font-medium italic">
+                Vishwas Deshpande Associates (VDAS) operates as a Regular Mutual Fund Distributor (ARN-90854) and receives trailing commission from AMCs for the services rendered. Registration granted by SEBI, membership of AMFI and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors.
+              </p>
+            </div>
+
+            {/* Tier 3: Legal & Credits */}
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-12 pt-4">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-x-8 gap-y-4">
+                {LEGAL.map(l => (
+                  l.external ? (
+                    <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="text-[11px] font-black text-slate-500 hover:text-vdas-blue transition-colors uppercase tracking-[0.3em]">{l.label}</a>
+                  ) : (
+                    <Link key={l.label} to={l.to!} className="text-[11px] font-black text-slate-500 hover:text-vdas-blue transition-colors uppercase tracking-[0.3em]">{l.label}</Link>
+                  )
+                ))}
+              </div>
+
+              <div className="text-center lg:text-right">
+                <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em] mb-1">© {new Date().getFullYear()} VDAS FINANCIAL · AMFI REGISTERED MUTUAL FUND DISTRIBUTOR</p>
+                <p className="text-[9px] font-black text-slate-400 uppercase tracking-[0.4em]">Design by <a href="https://ainatech.in" target="_blank" rel="noopener noreferrer" className="text-vdas-blue hover:text-vdas-orange transition-colors">AINATECH</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  )
+}
