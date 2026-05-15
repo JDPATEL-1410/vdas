@@ -85,9 +85,19 @@ export default function PageHero({
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-[1.1] font-heading"
             >
-              <span className="text-white">{title}</span>
+              {(() => {
+                const words = title.split(' ');
+                const lastWord = words.pop();
+                const mainTitle = words.join(' ');
+                return (
+                  <>
+                    <span className="text-white">{mainTitle} </span>
+                    <span className="text-vdas-orange">{lastWord}</span>
+                  </>
+                );
+              })()}
               {titleAccent && (
-                <span className="block text-vdas-orange mt-2 font-display text-[0.8em]">{titleAccent}</span>
+                <span className="text-vdas-orange font-display"> {titleAccent}</span>
               )}
             </motion.h1>
           </div>
