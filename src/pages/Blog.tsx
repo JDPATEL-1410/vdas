@@ -58,9 +58,8 @@ const FALLBACK_ARTICLES: ETArticle[] = [
 
 const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET'): Promise<ETArticle[]> => {
   const proxies = [
-    `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
     `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-    `https://corsproxy.io/?${encodeURIComponent(url)}`,
     url
   ]
 
@@ -70,13 +69,7 @@ const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET')
       const res = await fetch(proxy)
       if (!res.ok) continue
       
-      if (proxy.includes('allorigins')) {
-        const json = await res.json()
-        text = json.contents
-      } else {
-        text = await res.text()
-      }
-      
+      text = await res.text()
       if (text && (text.includes('<rss') || text.includes('<channel'))) break
     } catch (_) { 
       continue 
@@ -166,20 +159,19 @@ const fetchFeed = async (url: string, defaultLabel: string, source: 'NJ' | 'ET')
 }
 
 export default function Blog() {
-  const [articles, setArticles] = useState<ETArticle[]>([])
+  const [articles, setArticles] = useState<ETArticle[]>(FALLBACK_ARTICLES)
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('All Insights')
 
   useEffect(() => {
     const fetchAllArticles = async () => {
-      setLoading(true)
+      // Don't set loading if we have fallback data already showing, 
+      // but we'll use it for the initial mount pulse if desired.
       try {
         const results = await Promise.all(FEEDS.map(f => fetchFeed(f.url, f.label, f.source)))
         const allFetched = results.flat()
 
-        if (allFetched.length === 0) {
-          setArticles(FALLBACK_ARTICLES)
-        } else {
+        if (allFetched.length > 0) {
           const processed = allFetched
             .sort((a, b) => b.timestamp - a.timestamp)
             .filter((v, i, a) => a.findIndex(t => t.link === v.link) === i)
@@ -187,7 +179,7 @@ export default function Blog() {
           setArticles(processed)
         }
       } catch (err) {
-        setArticles(FALLBACK_ARTICLES)
+        console.warn("Blog fetch failed, keeping fallbacks")
       } finally {
         setLoading(false)
       }

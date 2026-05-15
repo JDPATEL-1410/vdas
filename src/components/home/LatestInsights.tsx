@@ -19,7 +19,26 @@ const FEEDS = [
 ]
 
 export default function LatestInsights() {
-  const [articles, setArticles] = useState<Article[]>([])
+  const [articles, setArticles] = useState<Article[]>([
+    {
+      title: "Market Outlook: Navigating Volatility in 2026",
+      link: "/blog",
+      pubDate: "Today",
+      timestamp: Date.now(),
+      thumbnail: "/wealth_management_dashboard_1778479882040.png",
+      category: "Market Pulse",
+      source: "VDAS"
+    },
+    {
+      title: "The Power of SIP: Building Wealth for India's Future",
+      link: "/blog",
+      pubDate: "Yesterday",
+      timestamp: Date.now() - 86400000,
+      thumbnail: "/sip_goals_light_hero_1778502068391.png",
+      category: "Personal Finance",
+      source: "VDAS"
+    }
+  ])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -30,10 +49,9 @@ export default function LatestInsights() {
         
         const fetchAndParse = async (url: string, defaultLabel: string, source: string) => {
           const proxies = [
-            `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+            `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
             `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-            `https://cors-anywhere.herokuapp.com/${url}`,
-            url // Direct (might work if server has CORS)
+            url
           ]
           
           let text = ""
@@ -41,17 +59,10 @@ export default function LatestInsights() {
             try {
               const res = await fetch(proxy)
               if (!res.ok) continue
-              
-              if (proxy.includes('allorigins')) {
-                const json = await res.json()
-                text = json.contents
-              } else {
-                text = await res.text()
-              }
+              text = await res.text()
               
               if (text && (text.includes('<rss') || text.includes('<channel'))) break
             } catch (e) {
-              console.warn(`Proxy ${proxy} failed for ${url}`)
               continue
             }
           }
@@ -156,7 +167,7 @@ export default function LatestInsights() {
         
         setArticles(processed)
       } catch (err) {
-        console.error("LatestInsights error:", err)
+        console.warn("LatestInsights fetch failed, keeping fallbacks")
       } finally {
         setLoading(false)
       }
