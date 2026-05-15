@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import PageSEO from '../components/ui/PageSEO'
-import PageHeader from '../components/ui/PageHeader'
+import PageHero from '../components/ui/PageHero'
 
 interface ETArticle {
   title: string
@@ -201,10 +201,10 @@ export default function Blog() {
         description="Comprehensive financial intelligence featuring live feeds from Economic Times and NJ Wealth. Stay updated with the latest market trends." 
       />
 
-      <PageHeader 
+      <PageHero 
         title="Intelligence Centre."
         titleAccent="Market Pulse."
-        subtitle="Real-time financial syndication. Merging global market research from Economic Times and institutional analysis."
+        description="Real-time financial syndication. Merging global market research from Economic Times and institutional analysis."
         image="/wealth_management_dashboard_1778479882040.png"
         badge="Live Financial Syndication"
         breadcrumbs={[{ label: 'Knowledge Centre' }]}

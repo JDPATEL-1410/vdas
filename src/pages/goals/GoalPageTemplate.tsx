@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageSEO from '../../components/ui/PageSEO'
-import PageHeader from '../../components/ui/PageHeader'
+import PageHero from '../../components/ui/PageHero'
 
 interface GoalStep { step: string; title: string; desc: string }
 interface GoalFact { label: string; value: string }
@@ -29,9 +29,9 @@ export default function GoalPageTemplate({
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <PageSEO title={seoTitle} description={seoDesc} />
-      <PageHeader 
+      <PageHero 
         title={title}
-        subtitle={subtitle}
+        description={subtitle}
         image={image}
         breadcrumbs={[{ label: 'Goals', to: '/goals' }, { label: breadcrumbLabel }]}
       />

@@ -3,7 +3,7 @@ import PageSEO from '../components/ui/PageSEO'
 import ProductTabs from '../components/home/ProductTabs'
 import SIPWidget from '../components/home/SIPWidget'
 import CTABanner from '../components/home/CTABanner'
-import PageHeader from '../components/ui/PageHeader'
+import PageHero from '../components/ui/PageHero'
 
 export default function Products() {
   return (
@@ -18,9 +18,9 @@ export default function Products() {
         description="Explore our range of curated investment products including Mutual Funds, SIPs, and PMS. Tailored solutions for your financial goals."
       />
 
-      <PageHeader 
+      <PageHero 
         title="Institutional-Grade Selection."
-        subtitle="Access top-tier mutual fund schemes and structured products, curated through 33+ years of market cycles."
+        description="Access top-tier mutual fund schemes and structured products, curated through 33+ years of market cycles."
         image="/wealth_management_dashboard_1778479882040.png"
       />
 

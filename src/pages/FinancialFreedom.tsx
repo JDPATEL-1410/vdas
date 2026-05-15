@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageSEO from '../components/ui/PageSEO'
-import PageHeader from '../components/ui/PageHeader'
+import PageHero from '../components/ui/PageHero'
 
 const PRINCIPLES = [
   { no: '01', title: 'Money Is a Tool, Not the Goal', desc: 'Financial freedom means having enough money to do what matters most — more time with family, pursuing passions, and giving back.' },
@@ -17,9 +17,9 @@ export default function FinancialFreedom() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <PageSEO title="Financial Freedom Framework | VDAS" description="The VDAS Financial Freedom Framework — 6 timeless principles to achieve financial independence in India." />
       
-      <PageHeader 
+      <PageHero 
         title="Your Path to Financial Autonomy."
-        subtitle="Financial freedom isn't about being rich. It's about having enough resources to choose how you spend your time, your energy, and your life."
+        description="Financial freedom isn't about being rich. It's about having enough resources to choose how you spend your time, your energy, and your life."
         image="/financial_freedom_family_1778479843533.png"
       />
 

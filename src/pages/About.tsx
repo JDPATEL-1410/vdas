@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import PageSEO from '../components/ui/PageSEO'
-import PageHeader from '../components/ui/PageHeader'
+import PageHero from '../components/ui/PageHero'
 
 const TIMELINE = [
   { year: '1991', title: 'The Foundation', desc: 'Vishwas Deshpande established VDAS with a vision to bring transparency to family wealth management.' },
@@ -22,9 +22,9 @@ export default function About() {
         description="Learn about the history and values of VDAS. Founded by Vishwas Deshpande, we have been helping families achieve financial peace since 1991."
       />
 
-      <PageHeader 
+      <PageHero 
         title="Heritage of Trust. Future of Growth."
-        subtitle="Serving over 5,000 families since 1991 with research-driven wisdom and unwavering integrity."
+        description="Serving over 5,000 families since 1991 with research-driven wisdom and unwavering integrity."
         image="/vdas_office_heritage_1778481089115.png"
         breadcrumbs={[{ label: 'About Us' }]}
       />

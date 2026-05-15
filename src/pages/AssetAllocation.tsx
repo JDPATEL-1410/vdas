@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 import { useState } from 'react'
 import PageSEO from '../components/ui/PageSEO'
-import PageHeader from '../components/ui/PageHeader'
+import PageHero from '../components/ui/PageHero'
 
 const PROFILES = [
   {
@@ -33,9 +33,9 @@ export default function AssetAllocation() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <PageSEO title="Asset Allocation Guide | VDAS Financial" description="Understand asset allocation — how to divide your investments across equity, debt, and other assets based on your risk profile." />
       
-      <PageHeader 
+      <PageHero 
         title="Portfolio Architecture."
-        subtitle="Asset allocation determines over 90% of your long-term returns. We help you design the structural foundation for your wealth."
+        description="Asset allocation determines over 90% of your long-term returns. We help you design the structural foundation for your wealth."
         image="/wealth_management_dashboard_1778479882040.png"
       />
 

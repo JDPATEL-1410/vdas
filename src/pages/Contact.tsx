@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import ContactForm from '../components/ui/ContactForm'
 import PageSEO from '../components/ui/PageSEO'
-import PageHeader from '../components/ui/PageHeader'
+import PageHero from '../components/ui/PageHero'
 
 export default function Contact() {
   return (
@@ -16,9 +16,9 @@ export default function Contact() {
         description="Contact VDAS for professional wealth management and financial planning. Our team in Mumbai is ready to help you help you achieve your goals."
       />
 
-      <PageHeader 
+      <PageHero 
         title="Let's Plan Your Future."
-        subtitle="Expert financial guidance is just a message away. Reach out today to start building your generational legacy."
+        description="Expert financial guidance is just a message away. Reach out today to start building your generational legacy."
         image="/financial_consultation_meeting_1778481110902.png"
         breadcrumbs={[{ label: 'Contact Us' }]}
       />

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import PageSEO from '../components/ui/PageSEO'
 import ArticleCard from '../components/articles/ArticleCard'
-import PageHeader from '../components/ui/PageHeader'
+import PageHero from '../components/ui/PageHero'
 
 const ARTICLES = [
   {
@@ -55,9 +55,9 @@ export default function Articles() {
         description="Stay updated with the latest financial insights, investment strategies, and tax-saving tips from the experts at VDAS."
       />
 
-      <PageHeader 
+      <PageHero 
         title="Financial Insights."
-        subtitle="Expert articles and strategic wisdom to guide your investment journey and empower your financial decisions."
+        description="Expert articles and strategic wisdom to guide your investment journey and empower your financial decisions."
         image="/images/professional-advice.png"
       />
 

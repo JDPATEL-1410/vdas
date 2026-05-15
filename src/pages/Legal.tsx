@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageSEO from '../components/ui/PageSEO'
-import PageHeader from '../components/ui/PageHeader'
+import PageHero from '../components/ui/PageHero'
 
 interface LegalPageProps { 
   title: string; 
@@ -16,9 +16,9 @@ export function LegalPage({ title, seoTitle, lastUpdated, image, children }: Leg
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <PageSEO title={`${seoTitle} | VDAS Financial`} description={`${title} for VDAS Financial — Vishwas Deshpande Associates.`} />
       
-      <PageHeader 
+      <PageHero 
         title={title}
-        subtitle={`Version 2.2 • Last Modified ${lastUpdated}`}
+        description={`Version 2.2 • Last Modified ${lastUpdated}`}
         image={image}
         breadcrumbs={[{ label: 'Legal', to: '/legal' }, { label: title }]}
         badge="Institutional Compliance"

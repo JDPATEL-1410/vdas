@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageSEO from '../../components/ui/PageSEO'
-import PageHeader from '../../components/ui/PageHeader'
+import PageHero from '../../components/ui/PageHero'
 
 const GOALS = [
   { 
@@ -78,9 +78,9 @@ export default function GoalsPage() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <PageSEO title="Financial Goals | Plan Your Future | VDAS" description="Plan and achieve your financial goals — retirement, home, education, wedding, and more with VDAS expert guidance." />
       
-      <PageHeader 
+      <PageHero 
         title="Map Your Life's Destiny."
-        subtitle="We help you architect, plan, and achieve your most significant life milestones through research-backed, goal-based investing."
+        description="We help you architect, plan, and achieve your most significant life milestones through research-backed, goal-based investing."
         image="/goal_index_header_1778571678464.png"
       />
 

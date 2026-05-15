@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageSEO from '../../components/ui/PageSEO'
-import PageHeader from '../../components/ui/PageHeader'
+import PageHero from '../../components/ui/PageHero'
 
 interface ServiceFeature { title: string; desc: string }
 
@@ -23,9 +23,9 @@ export default function ServicePageTemplate({
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <PageSEO title={seoTitle} description={seoDesc} />
-      <PageHeader 
+      <PageHero 
         title={title}
-        subtitle={subtitle}
+        description={subtitle}
         image={image}
         breadcrumbs={[{ label: 'Services', to: '/services' }, { label: breadcrumbLabel }]}
       />

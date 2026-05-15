@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import PageSEO from '../components/ui/PageSEO'
 import ServicesGrid from '../components/home/ServicesGrid'
 import CTABanner from '../components/home/CTABanner'
-import PageHeader from '../components/ui/PageHeader'
+import PageHero from '../components/ui/PageHero'
 
 const PROCESS = [
   { step: '01', title: 'Consultation', desc: 'We begin by understanding your unique financial situation and long-term aspirations.' },
@@ -25,9 +25,9 @@ export default function Services() {
         description="Discover our range of financial services including Mutual Funds, Retirement Planning, and Insurance. Expert guidance for a secure future."
       />
 
-      <PageHeader 
+      <PageHero 
         title="Comprehensive Wealth Strategies."
-        subtitle="Protecting your capital and accelerating your growth through research-backed financial planning and disciplined execution."
+        description="Protecting your capital and accelerating your growth through research-backed financial planning and disciplined execution."
         image="/vdas_office_heritage_1778481089115.png"
       />
 
