@@ -35,6 +35,7 @@ export default function AssetAllocation() {
       
       <PageHero 
         title="Portfolio Architecture."
+        titleAccent="Strategic Allocation."
         description="Asset allocation determines over 90% of your long-term returns. We help you design the structural foundation for your wealth."
         image="/wealth_management_dashboard_1778479882040.png"
       />

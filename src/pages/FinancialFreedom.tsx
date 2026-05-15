@@ -18,7 +18,8 @@ export default function FinancialFreedom() {
       <PageSEO title="Financial Freedom Framework | VDAS" description="The VDAS Financial Freedom Framework — 6 timeless principles to achieve financial independence in India." />
       
       <PageHero 
-        title="Your Path to Financial Autonomy."
+        title="Your Path to Autonomy."
+        titleAccent="Architecting Freedom."
         description="Financial freedom isn't about being rich. It's about having enough resources to choose how you spend your time, your energy, and your life."
         image="/financial_freedom_family_1778479843533.png"
       />

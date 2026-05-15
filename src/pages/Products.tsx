@@ -20,6 +20,7 @@ export default function Products() {
 
       <PageHero 
         title="Institutional-Grade Selection."
+        titleAccent="Expert Curation."
         description="Access top-tier mutual fund schemes and structured products, curated through 33+ years of market cycles."
         image="/wealth_management_dashboard_1778479882040.png"
       />

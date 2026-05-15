@@ -18,6 +18,7 @@ export default function Contact() {
 
       <PageHero 
         title="Let's Plan Your Future."
+        titleAccent="Begin Your Legacy."
         description="Expert financial guidance is just a message away. Reach out today to start building your generational legacy."
         image="/financial_consultation_meeting_1778481110902.png"
         breadcrumbs={[{ label: 'Contact Us' }]}

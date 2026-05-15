@@ -27,6 +27,7 @@ export default function Services() {
 
       <PageHero 
         title="Comprehensive Wealth Strategies."
+        titleAccent="Institutional Grade."
         description="Protecting your capital and accelerating your growth through research-backed financial planning and disciplined execution."
         image="/vdas_office_heritage_1778481089115.png"
       />

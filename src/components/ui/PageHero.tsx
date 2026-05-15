@@ -83,11 +83,11 @@ export default function PageHero({
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-4xl sm:text-6xl lg:text-7xl font-black !text-white tracking-tighter leading-[1.1] font-heading"
+              className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-[1.1] font-heading"
             >
-              {title}
+              <span className="text-white">{title}</span>
               {titleAccent && (
-                <span className="block text-vdas-orange mt-2 font-display">{titleAccent}</span>
+                <span className="block text-vdas-orange mt-2 font-display text-[0.8em]">{titleAccent}</span>
               )}
             </motion.h1>
           </div>

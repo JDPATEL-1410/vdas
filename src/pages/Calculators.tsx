@@ -150,6 +150,7 @@ export default function Calculators() {
       
       <PageHero 
         title="Precision Planning Tools."
+        titleAccent="Visualize Your Destiny."
         description="14 Professional-grade calculators to help you simulate investments, plan goals, and visualize your financial destiny."
         image="/financial_planning_precision_tools_1778484192484.png"
         breadcrumbs={[{ label: 'Calculators' }]}

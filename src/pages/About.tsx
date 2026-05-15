@@ -23,7 +23,8 @@ export default function About() {
       />
 
       <PageHero 
-        title="Heritage of Trust. Future of Growth."
+        title="Three Decades of Trust."
+        titleAccent="Future of Growth."
         description="Serving over 5,000 families since 1991 with research-driven wisdom and unwavering integrity."
         image="/vdas_office_heritage_1778481089115.png"
         breadcrumbs={[{ label: 'About Us' }]}
