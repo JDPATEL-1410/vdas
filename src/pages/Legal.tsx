@@ -201,13 +201,24 @@ export function GrievanceRedressal() {
       <h2>Level 2: SEBI SCORES Portal</h2>
       <p>If the grievance is not redressed within 30 days of filing the complaint with us, you may lodge a complaint with SEBI through the SCORES (SEBI Complaints Redress System) portal.</p>
       <p>SCORES facilitates you to lodge your complaint online with SEBI and subsequently view its status. The platform ensures a transparent and structured resolution process monitored by the regulator.</p>
+      
+      <div className="bg-vdas-orange/5 rounded-2xl p-6 border border-vdas-orange/10 mb-8 inline-flex items-center gap-4">
+        <div className="w-12 h-12 bg-vdas-orange/10 rounded-xl flex items-center justify-center text-vdas-orange">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </div>
+        <div>
+          <p className="text-[10px] font-black text-vdas-orange uppercase tracking-widest mb-1">Entity Registration Number (ARN)</p>
+          <p className="text-xl font-black text-vdas-blue-dark">ARN-90854</p>
+        </div>
+      </div>
+
       <div className="flex flex-wrap gap-4 mt-8">
-        <a href="https://scores.gov.in/scores/Welcome.html" target="_blank" rel="noopener noreferrer" 
+        <a href="https://scores.sebi.gov.in/" target="_blank" rel="noopener noreferrer" 
            className="inline-flex items-center gap-3 bg-vdas-blue text-white px-8 py-4 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-vdas-orange transition-all shadow-lg shadow-vdas-blue/20">
           Lodge Complaint on SCORES
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
         </a>
-        <a href="https://smartodr.in/login" target="_blank" rel="noopener noreferrer" 
+        <a href="https://smartodr.in/" target="_blank" rel="noopener noreferrer" 
            className="inline-flex items-center gap-3 border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all">
           Online Dispute Resolution (SMART ODR)
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
