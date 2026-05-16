@@ -74,7 +74,7 @@ export default function GoalPageTemplate({
             <div className="space-y-6">
               <div className="bg-[#0A1A4F] rounded-3xl p-8 text-center">
                 <div className="text-blue-400 flex justify-center mb-6">{icon}</div>
-                <h3 className="text-white font-black text-lg mb-3">Start Planning Today</h3>
+                <h3 className="!text-white font-black text-lg mb-3">Start Planning Today</h3>
                 <p className="text-slate-400 text-sm font-medium mb-6">Get a personalised plan for this goal from our advisor.</p>
                 <Link to="/contact" className="block w-full bg-blue-500 hover:bg-blue-400 text-white py-3 rounded-xl text-[11px] font-black uppercase tracking-widest transition-colors">
                   Book Free Consultation
