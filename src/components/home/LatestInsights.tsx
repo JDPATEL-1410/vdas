@@ -140,36 +140,20 @@ export default function LatestInsights() {
         const results = await Promise.all(FEEDS.map(f => fetchAndParse(f.url, f.label, f.source)))
         allFetched = results.flat()
 
-        // Fallback to static data if all fetches fail
-        if (allFetched.length === 0) {
-          allFetched = [
-            {
-              title: "Market Outlook: Navigating Volatility in 2026",
-              link: "/blog",
-              pubDate: "Today",
-              timestamp: Date.now(),
-              thumbnail: "/wealth_management_dashboard_1778479882040.png",
-              category: "Market Pulse",
-              source: "VDAS"
-            },
-            {
-              title: "The Power of SIP: Building Wealth for India's Future",
-              link: "/blog",
-              pubDate: "Yesterday",
-              timestamp: Date.now() - 86400000,
-              thumbnail: "/sip_goals_light_hero_1778502068391.png",
-              category: "Personal Finance",
-              source: "VDAS"
-            }
-          ]
-        }
+        if (allFetched.length > 0) {
+          const sorted = allFetched
+            .sort((a, b) => b.timestamp - a.timestamp)
+            .filter((v, i, a) => a.findIndex(t => t.link === v.link) === i)
 
-        const processed = allFetched
-          .sort((a, b) => b.timestamp - a.timestamp)
-          .filter((v, i, a) => a.findIndex(t => t.link === v.link) === i)
-          .slice(0, 3)
-        
-        setArticles(processed)
+          const newestDate = new Date(sorted[0].timestamp).toLocaleDateString()
+          const dailyArticles = sorted.filter(a => new Date(a.timestamp).toLocaleDateString() === newestDate)
+          
+          const processed = dailyArticles.length >= 3 
+            ? dailyArticles.slice(0, 6) 
+            : sorted.slice(0, 3)
+          
+          setArticles(processed)
+        }
       } catch (err) {
         console.warn("LatestInsights fetch failed, keeping fallbacks")
       } finally {

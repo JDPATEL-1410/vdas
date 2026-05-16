@@ -171,10 +171,19 @@ export default function Blog() {
         const allFetched = results.flat()
 
         if (allFetched.length > 0) {
-          const processed = allFetched
+          const sorted = allFetched
             .sort((a, b) => b.timestamp - a.timestamp)
             .filter((v, i, a) => a.findIndex(t => t.link === v.link) === i)
-            .slice(0, 36)
+
+          const newestDate = new Date(sorted[0].timestamp).toLocaleDateString()
+          const dailyArticles = sorted.filter(a => new Date(a.timestamp).toLocaleDateString() === newestDate)
+
+          // On the main blog page, we show all from the most recent day (up to 24)
+          // If there are too few daily articles, we fallback to the last 12
+          const processed = dailyArticles.length >= 6
+            ? dailyArticles.slice(0, 24)
+            : sorted.slice(0, 12)
+            
           setArticles(processed)
         }
       } catch (err) {
