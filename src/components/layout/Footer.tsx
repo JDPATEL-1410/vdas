@@ -82,8 +82,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* ── Top Block: Primary Navigation ── */}
-        <div className="grid lg:grid-cols-12 gap-12 sm:gap-16 mb-16 sm:mb-24 items-start">
-          <div className="lg:col-span-4 space-y-8 sm:space-y-12">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-16 sm:mb-24 items-start">
+          <div className="lg:col-span-4 space-y-8 sm:space-y-12 flex flex-col items-center lg:items-start text-center lg:text-left">
             <Link to="/" className="inline-block group">
               <img
                 src="/vdas_logo_new.png"
@@ -96,7 +96,7 @@ export default function Footer() {
                 Architecting Wealth. <br />
                 <span className="text-vdas-orange italic">Preserving Legacies.</span>
               </h3>
-              <p className="text-slate-500 text-base sm:text-lg font-medium leading-relaxed max-w-sm">
+              <p className="text-slate-500 text-sm sm:text-lg font-medium leading-relaxed max-w-sm">
                 Institutional-grade wealth advisory and systematic investment frameworks since 1991. Serving India's elite families with integrity.
               </p>
               {/* Registered Office Address - SEBI Compliance */}
@@ -107,39 +107,39 @@ export default function Footer() {
             </div>
             
             {/* Social Icons */}
-            <div className="flex items-center gap-4 pt-4">
+            <div className="flex items-center gap-4 pt-2 sm:pt-4">
               {SOCIAL_LINKS.map(s => (
                 <a 
                   key={s.label} 
                   href={s.href} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className={`w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-white hover:shadow-xl transition-all duration-500 group ${s.hoverClass}`}
+                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:text-white hover:shadow-xl transition-all duration-500 group ${s.hoverClass}`}
                   title={s.label}
                 >
-                  <div className="group-hover:scale-110 transition-transform duration-500">
+                  <div className="group-hover:scale-110 transition-transform duration-500 scale-90 sm:scale-100">
                     {s.icon}
                   </div>
                 </a>
               ))}
             </div>
 
-            <div className="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-200/60 shadow-sm inline-flex items-center gap-6">
-              <div className="w-16 h-16 bg-vdas-blue rounded-2xl flex items-center justify-center text-white font-black text-xs shadow-xl shadow-vdas-blue/20">AMFI</div>
-              <div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-1">Registered Distributor</p>
-                <p className="text-xl font-black text-vdas-blue-dark uppercase tracking-tighter">ARN-90854</p>
+            <div className="bg-slate-50 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 border border-slate-200/60 shadow-sm inline-flex items-center gap-4 sm:gap-6">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-vdas-blue rounded-xl sm:rounded-2xl flex items-center justify-center text-white font-black text-[10px] sm:text-xs shadow-xl shadow-vdas-blue/20">AMFI</div>
+              <div className="text-left">
+                <p className="text-[8px] sm:text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] sm:tracking-[0.4em] mb-0.5 sm:mb-1">Registered Distributor</p>
+                <p className="text-lg sm:text-xl font-black text-vdas-blue-dark uppercase tracking-tighter">ARN-90854</p>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-16 lg:pl-20">
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-x-6 sm:gap-x-16 gap-y-12 lg:pl-20">
             <div className="space-y-6 sm:space-y-10">
               <h4 className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.4em] sm:tracking-[0.5em] text-vdas-orange">Solutions</h4>
               <ul className="space-y-3 sm:space-y-5">
                 {SOLUTIONS.map(l => (
                   <li key={l.label}>
-                    <Link to={l.to} className="text-sm sm:text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
+                    <Link to={l.to} className="text-[13px] sm:text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
                       {l.label}
                     </Link>
                   </li>
@@ -151,26 +151,26 @@ export default function Footer() {
               <ul className="space-y-3 sm:space-y-5">
                 {CALCULATORS.map(l => (
                   <li key={l.label}>
-                    <Link to={l.to} className="text-sm sm:text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
+                    <Link to={l.to} className="text-[13px] sm:text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
                       {l.label}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="space-y-6 sm:space-y-10">
+            <div className="space-y-6 sm:space-y-10 col-span-2 sm:col-span-1">
               <h4 className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.4em] sm:tracking-[0.5em] text-vdas-orange">Corporate</h4>
-              <ul className="space-y-3 sm:space-y-5">
+              <ul className="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-5">
                 {CORPORATE.map(l => (
                   <li key={l.label}>
-                    <Link to={l.to} className="text-sm sm:text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
+                    <Link to={l.to} className="text-[13px] sm:text-[15px] font-bold text-slate-500 hover:text-vdas-blue transition-all hover:translate-x-1 inline-block">
                       {l.label}
                     </Link>
                   </li>
                 ))}
-                <li>
+                <li className="col-span-2 sm:col-span-1 pt-2 sm:pt-0">
                   <a href="https://ewa.njindiaonline.com" target="_blank" rel="noopener noreferrer" 
-                     className="inline-flex items-center gap-2 bg-vdas-blue text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-widest hover:bg-vdas-orange transition-all shadow-lg shadow-vdas-blue/20">
+                     className="inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-vdas-blue text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-widest hover:bg-vdas-orange transition-all shadow-lg shadow-vdas-blue/20">
                     Client Login
                   </a>
                 </li>
@@ -185,12 +185,12 @@ export default function Footer() {
           
           <div className="relative z-10 space-y-10 sm:space-y-16">
             {/* Tier 1: Regulators */}
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-              <h5 className="text-[11px] font-black text-slate-900 uppercase tracking-[0.5em] flex-shrink-0">Regulatory Governance</h5>
-              <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 sm:gap-8">
+              <h5 className="text-[10px] sm:text-[11px] font-black text-slate-900 uppercase tracking-[0.3em] sm:tracking-[0.5em] flex-shrink-0">Regulatory Governance</h5>
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 {REGULATORS.map(r => (
                   <a key={r.label} href={r.href} target="_blank" rel="noopener noreferrer" 
-                     className="px-5 py-2.5 rounded-xl bg-white border border-slate-200 text-[10px] font-black text-slate-500 hover:border-vdas-blue hover:text-vdas-blue transition-all uppercase tracking-widest">
+                     className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl bg-white border border-slate-200 text-[9px] sm:text-[10px] font-black text-slate-500 hover:border-vdas-blue hover:text-vdas-blue transition-all uppercase tracking-widest">
                     {r.label}
                   </a>
                 ))}
@@ -210,7 +210,7 @@ export default function Footer() {
 
             {/* Tier 3: Legal & Credits */}
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 pt-4">
-              <div className="flex flex-wrap justify-center lg:justify-start gap-x-6 sm:gap-x-8 gap-y-3 sm:gap-y-4">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-x-5 sm:gap-x-8 gap-y-3 sm:gap-y-4">
                 {LEGAL.map(l => (
                   l.external ? (
                     <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="text-[9px] sm:text-[11px] font-black text-slate-500 hover:text-vdas-blue transition-colors uppercase tracking-[0.2em] sm:tracking-[0.3em]">{l.label}</a>
@@ -221,7 +221,7 @@ export default function Footer() {
               </div>
 
               <div className="text-center lg:text-right">
-                <p className="text-[8px] sm:text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] sm:tracking-[0.4em] mb-1">© {new Date().getFullYear()} VDAS FINANCIAL · AMFI REGISTERED MUTUAL FUND DISTRIBUTOR</p>
+                <p className="text-[8px] sm:text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] sm:tracking-[0.4em] mb-1 leading-relaxed">© {new Date().getFullYear()} VDAS FINANCIAL · AMFI REGISTERED MUTUAL FUND DISTRIBUTOR</p>
                 <p className="text-[8px] sm:text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] sm:tracking-[0.4em]">Design by <a href="https://ainatech.in" target="_blank" rel="noopener noreferrer" className="text-vdas-blue hover:text-vdas-orange transition-colors">AINATECH</a></p>
               </div>
             </div>
