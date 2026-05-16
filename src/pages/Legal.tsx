@@ -12,7 +12,7 @@ interface LegalPageProps {
   children: React.ReactNode 
 }
 
-export function LegalPage({ title, seoTitle, lastUpdated, image, children }: LegalPageProps) {
+export function LegalPage({ title, seoTitle, lastUpdated, image, description, children }: LegalPageProps) {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       <PageSEO title={`${seoTitle} | VDAS Financial`} description={`${title} for VDAS Financial — Vishwas Deshpande Associates.`} />
