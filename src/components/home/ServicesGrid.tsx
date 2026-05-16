@@ -58,16 +58,16 @@ const SERVICES = [
 
 export default function ServicesGrid() {
   return (
-    <section className="py-32 bg-white relative overflow-hidden">
+    <section className="py-16 sm:py-32 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header */}
-        <div className="text-center mb-24">
+        <div className="text-center mb-12 sm:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-vdas-orange text-[11px] font-black uppercase tracking-[0.4em] mb-6"
+            className="text-vdas-orange text-[10px] sm:text-[11px] font-black uppercase tracking-[0.3em] sm:tracking-[0.4em] mb-4 sm:mb-6"
           >
             Our Core Expertise
           </motion.div>
@@ -75,15 +75,15 @@ export default function ServicesGrid() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl lg:text-7xl font-black text-vdas-blue-dark tracking-tighter leading-[1.1] font-display"
+            className="text-3xl sm:text-5xl lg:text-7xl font-black text-vdas-blue-dark tracking-tighter leading-[1.1] font-display"
           >
-            Financial Services for <br />
+            Financial Services for <br className="hidden sm:block" />
             <span className="text-vdas-blue italic">Every Life Stage.</span>
           </motion.h2>
         </div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
           {SERVICES.map((svc, i) => (
             <motion.div
               key={svc.title}
@@ -91,30 +91,30 @@ export default function ServicesGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group bg-white rounded-[3rem] overflow-hidden border border-slate-100 hover:border-vdas-blue/20 shadow-premium transition-all duration-500"
+              className="group bg-white rounded-[2rem] sm:rounded-[3rem] overflow-hidden border border-slate-100 hover:border-vdas-blue/20 shadow-premium transition-all duration-500"
             >
-              <div className="h-64 overflow-hidden relative">
+              <div className="h-48 sm:h-64 overflow-hidden relative">
                 <img src={svc.image} alt={svc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-vdas-blue-dark/80 via-transparent to-transparent" />
-                <div className={`absolute bottom-6 left-6 w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-xl ${svc.accent === 'vdas-orange' ? 'bg-vdas-orange' : 'bg-vdas-blue'}`}>
-                  {svc.icon}
+                <div className={`absolute bottom-4 sm:bottom-6 left-4 sm:left-6 w-10 sm:w-14 h-10 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-xl ${svc.accent === 'vdas-orange' ? 'bg-vdas-orange' : 'bg-vdas-blue'}`}>
+                  <div className="scale-75 sm:scale-100">{svc.icon}</div>
                 </div>
               </div>
-              <div className="p-10">
-                <h3 className="text-2xl font-black text-vdas-blue-dark mb-4 tracking-tight">{svc.title}</h3>
-                <p className="text-slate-500 text-base font-medium mb-8 leading-relaxed">{svc.description}</p>
-                <div className="grid grid-cols-1 gap-3 mb-10">
+              <div className="p-6 sm:p-10">
+                <h3 className="text-xl sm:text-2xl font-black text-vdas-blue-dark mb-3 sm:mb-4 tracking-tight">{svc.title}</h3>
+                <p className="text-slate-500 text-sm sm:text-base font-medium mb-6 sm:mb-8 leading-relaxed">{svc.description}</p>
+                <div className="grid grid-cols-1 gap-2 sm:gap-3 mb-8 sm:mb-10">
                   {svc.features.map(f => (
-                    <div key={f} className="flex items-center gap-3 bg-slate-50 border border-slate-100 rounded-xl px-4 py-2 group-hover:bg-white transition-colors">
-                      <div className={`w-1.5 h-1.5 rounded-full ${svc.accent === 'vdas-orange' ? 'bg-vdas-orange' : 'bg-vdas-blue'}`} />
-                      <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{f}</span>
+                    <div key={f} className="flex items-center gap-3 bg-slate-50 border border-slate-100 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 group-hover:bg-white transition-colors">
+                      <div className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${svc.accent === 'vdas-orange' ? 'bg-vdas-orange' : 'bg-vdas-blue'}`} />
+                      <span className="text-[8px] sm:text-[10px] font-black text-slate-500 uppercase tracking-widest">{f}</span>
                     </div>
                   ))}
                 </div>
-                <Link to={svc.link} className={`inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.3em] transition-all hover:gap-5 ${svc.accent === 'vdas-orange' ? 'text-vdas-orange' : 'text-vdas-blue'}`}>
+                <Link to={svc.link} className={`inline-flex items-center gap-3 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] transition-all hover:gap-5 ${svc.accent === 'vdas-orange' ? 'text-vdas-orange' : 'text-vdas-blue'}`}>
                   Explore Service
-                  <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${svc.accent === 'vdas-orange' ? 'border-vdas-orange/20 group-hover:bg-vdas-orange group-hover:text-white' : 'border-vdas-blue/20 group-hover:bg-vdas-blue group-hover:text-white'}`}>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className={`w-6 sm:w-8 h-6 sm:h-8 rounded-full border-2 flex items-center justify-center transition-all ${svc.accent === 'vdas-orange' ? 'border-vdas-orange/20 group-hover:bg-vdas-orange group-hover:text-white' : 'border-vdas-blue/20 group-hover:bg-vdas-blue group-hover:text-white'}`}>
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </div>

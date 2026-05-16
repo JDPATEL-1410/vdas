@@ -70,84 +70,84 @@ export default function TestimonialSlider() {
   }
 
   return (
-    <section className="py-32 bg-white relative overflow-hidden">
+    <section className="py-16 sm:py-32 bg-white relative overflow-hidden">
       {/* Decorative Background */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-vdas-blue/5 rounded-full blur-[120px] -mr-32 -mt-32" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-vdas-orange/5 rounded-full blur-[100px] -ml-24 -mb-24" />
+      <div className="absolute top-0 right-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-vdas-blue/5 rounded-full blur-[80px] sm:blur-[120px] -mr-16 sm:-mr-32 -mt-16 sm:-mt-32" />
+      <div className="absolute bottom-0 left-0 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-vdas-orange/5 rounded-full blur-[70px] sm:blur-[100px] -ml-12 sm:-ml-24 -mb-12 sm:-mb-24" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-24">
+        <div className="text-center mb-12 sm:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="flex items-center justify-center gap-3 mb-6"
           >
-            <div className="w-10 h-0.5 bg-vdas-orange rounded-full" />
-            <span className="text-vdas-blue text-[10px] font-black uppercase tracking-[0.4em]">Client Testimonials</span>
-            <div className="w-10 h-0.5 bg-vdas-orange rounded-full" />
+            <div className="w-8 sm:w-10 h-0.5 bg-vdas-orange rounded-full" />
+            <span className="text-vdas-blue text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] sm:tracking-[0.4em]">Client Testimonials</span>
+            <div className="w-8 sm:w-10 h-0.5 bg-vdas-orange rounded-full" />
           </motion.div>
-          <h2 className="text-4xl sm:text-6xl font-black text-slate-900 mb-8 tracking-tighter font-heading leading-tight">
+          <h2 className="text-3xl sm:text-6xl font-black text-slate-900 mb-6 sm:mb-8 tracking-tighter font-heading leading-tight px-4">
             Voices of <span className="text-vdas-blue">Institutional Trust.</span>
           </h2>
-          <div className="flex flex-col items-center gap-4">
-            <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-2xl px-6 py-3 shadow-sm">
-              <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" className="h-5 w-auto" />
-              <div className="w-px h-4 bg-slate-300 mx-2" />
+          <div className="flex flex-col items-center gap-4 px-4">
+            <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-2xl px-4 sm:px-6 py-2.5 sm:py-3 shadow-sm">
+              <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" className="h-4 sm:h-5 w-auto" />
+              <div className="w-px h-4 bg-slate-300 mx-1.5 sm:mx-2" />
               <div className="flex items-center gap-1">
-                <span className="text-lg font-black text-slate-800">4.9</span>
+                <span className="text-base sm:text-lg font-black text-slate-800">4.9</span>
                 <div className="flex">
                    {[1,2,3,4,5].map(i => (
-                     <svg key={i} className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                     <svg key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                      </svg>
                    ))}
                 </div>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-2">Rating</span>
+                <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1 sm:ml-2">Rating</span>
               </div>
             </div>
-            <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium">
+            <p className="text-slate-500 max-w-2xl mx-auto text-base sm:text-lg font-medium leading-relaxed">
               Over 5,000 elite families trust VDAS for research-driven financial planning and absolute integrity.
             </p>
           </div>
         </div>
 
-        <Slider {...settings} className="testimonial-slider-enhanced pb-16">
+        <Slider {...settings} className="testimonial-slider-enhanced pb-12 sm:pb-16">
           {TESTIMONIALS.map((t, i) => (
-            <div key={i} className="px-6 py-4">
+            <div key={i} className="px-2 sm:px-6 py-4">
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-12 rounded-[3.5rem] shadow-[0_30px_70px_-15px_rgba(0,86,179,0.1)] border border-slate-100 h-full flex flex-col group relative overflow-hidden"
+                className="bg-white p-6 sm:p-12 rounded-[2rem] sm:rounded-[3.5rem] shadow-[0_20px_50px_-15px_rgba(0,86,179,0.08)] sm:shadow-[0_30px_70px_-15px_rgba(0,86,179,0.1)] border border-slate-100 h-full flex flex-col group relative overflow-hidden"
               >
                 {/* Quote Icon */}
-                <div className="absolute top-10 right-12 text-slate-100 group-hover:text-vdas-blue/10 transition-colors duration-500">
-                  <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+                <div className="absolute top-6 sm:top-10 right-6 sm:right-12 text-slate-100 group-hover:text-vdas-blue/10 transition-colors duration-500">
+                  <svg className="w-10 h-10 sm:w-16 sm:h-16" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V13.5H12.017V9C12.017 7.34315 13.3601 6 15.017 6H19.017C20.6739 6 22.017 7.34315 22.017 9V15C22.017 16.6569 20.6739 18 19.017 18H16.017V21H14.017ZM2.01697 21L2.01697 18C2.01697 16.8954 2.91241 16 4.01697 16H7.01697C7.56925 16 8.01697 15.5523 8.01697 15V9C8.01697 8.44772 7.56925 8 7.01697 8H3.01697C2.46469 8 2.01697 8.44772 2.01697 9V13.5H0.016973V9C0.016973 7.34315 1.36012 6 3.01697 6H7.01697C8.67383 6 10.017 7.34315 10.017 9V15C10.017 16.6569 8.67383 18 7.01697 18H4.01697V21H2.01697Z" />
                   </svg>
                 </div>
 
-                <div className="mb-8"><StarRating /></div>
+                <div className="mb-6 sm:mb-8"><StarRating /></div>
                 
-                <p className="text-slate-600 text-lg lg:text-xl font-medium leading-relaxed mb-12 flex-1 italic relative z-10">
+                <p className="text-slate-600 text-base sm:text-lg lg:text-xl font-medium leading-relaxed mb-8 sm:mb-12 flex-1 italic relative z-10">
                   "{t.text}"
                 </p>
 
-                <div className="flex items-center justify-between pt-8 border-t border-slate-100 mt-auto">
-                  <div className="flex items-center gap-5">
-                    <div className="w-14 h-14 bg-gradient-to-br from-vdas-blue to-vdas-blue-dark rounded-2xl flex items-center justify-center text-white font-black text-sm shadow-lg shadow-vdas-blue/20">
+                <div className="flex items-center justify-between pt-6 sm:pt-8 border-t border-slate-100 mt-auto">
+                  <div className="flex items-center gap-3 sm:gap-5">
+                    <div className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br from-vdas-blue to-vdas-blue-dark rounded-xl sm:rounded-2xl flex items-center justify-center text-white font-black text-[10px] sm:text-sm shadow-lg shadow-vdas-blue/20">
                       {t.avatar}
                     </div>
                     <div>
-                      <p className="text-lg font-black text-slate-900 tracking-tight leading-none mb-1">{t.name}</p>
-                      <p className="text-[10px] font-black text-vdas-orange uppercase tracking-[0.2em]">{t.role}</p>
+                      <p className="text-sm sm:text-lg font-black text-slate-900 tracking-tight leading-none mb-1">{t.name}</p>
+                      <p className="text-[8px] sm:text-[10px] font-black text-vdas-orange uppercase tracking-[0.15em] sm:tracking-[0.2em]">{t.role}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" className="h-3 w-auto opacity-30 group-hover:opacity-100 transition-opacity mb-1 ml-auto" />
-                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{t.date}</p>
+                    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" className="h-2.5 sm:h-3 w-auto opacity-30 group-hover:opacity-100 transition-opacity mb-1 ml-auto" />
+                    <p className="text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-widest">{t.date}</p>
                   </div>
                 </div>
               </motion.div>
