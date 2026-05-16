@@ -49,7 +49,8 @@ export default function LatestInsights() {
         const fetchAndParse = async (url: string, defaultLabel: string, source: string) => {
           const proxies = [
             `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
+            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+            `https://corsproxy.io/?${encodeURIComponent(url)}`
           ]
           
           let text = ""
