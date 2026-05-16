@@ -59,7 +59,7 @@ import CarLoanCalcPage from './pages/calculators/CarLoanCalc'
 import VacationCalcPage from './pages/calculators/VacationCalc'
 
 // Legal
-import { PrivacyPolicy, TermsOfService, Disclaimer, CommissionDisclosure } from './pages/Legal'
+import { PrivacyPolicy, TermsOfService, Disclaimer, CommissionDisclosure, GrievanceRedressal } from './pages/Legal'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -133,6 +133,7 @@ export default function App() {
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/disclaimer" element={<Disclaimer />} />
             <Route path="/commission-disclosure" element={<CommissionDisclosure />} />
+            <Route path="/grievance-redressal" element={<GrievanceRedressal />} />
 
             {/* ── Legacy / Redirects ──────── */}
             <Route path="/products" element={<GoalBaseInvesting />} />

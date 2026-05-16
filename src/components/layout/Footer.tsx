@@ -32,7 +32,7 @@ const LEGAL = [
   { label: 'Terms of Use', to: '/terms-of-service' },
   { label: 'Commission Disclosure', to: '/commission-disclosure' },
   { label: 'Code of Conduct', href: '/AMFI_Code-of-Conduct.pdf', external: true },
-  { label: 'Grievance / SCORES', href: 'https://scores.gov.in/scores/Welcome.html', external: true },
+  { label: 'Grievance / SCORES', to: '/grievance-redressal' },
 ]
 
 const REGULATORS = [

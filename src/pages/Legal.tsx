@@ -166,3 +166,60 @@ export function CommissionDisclosure() {
     </LegalPage>
   )
 }
+
+export function GrievanceRedressal() {
+  return (
+    <LegalPage title="Grievance Redressal" seoTitle="Grievance & SCORES" lastUpdated="May 16, 2026" image="/legal_grievance_header.png">
+      <div className="p-10 bg-vdas-blue/5 border-l-8 border-vdas-orange rounded-3xl mb-12 shadow-sm">
+        <p className="text-2xl font-black text-vdas-blue-dark mb-3">Investor Grievance Policy</p>
+        <p className="text-slate-600 font-medium leading-relaxed">At VDAS Financial, we are committed to providing a transparent and efficient mechanism for the resolution of investor grievances in accordance with SEBI regulations.</p>
+      </div>
+
+      <h2>Level 1: Internal Redressal</h2>
+      <p>If you have any grievance or complaint regarding our services, please contact our Principal Officer directly. We aim to resolve all internal complaints within 15 working days.</p>
+      <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 mb-10">
+        <div className="grid sm:grid-cols-2 gap-8">
+          <div>
+            <p className="text-[10px] font-black text-vdas-orange uppercase tracking-widest mb-2">Contact Person</p>
+            <p className="text-slate-900 font-black">Mr. Vishwas Deshpande</p>
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-vdas-orange uppercase tracking-widest mb-2">Email Address</p>
+            <p className="text-slate-900 font-black">vishwas@vdasfinancial.com</p>
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-vdas-orange uppercase tracking-widest mb-2">Phone Number</p>
+            <p className="text-slate-900 font-black">+91 98220 00000</p>
+          </div>
+          <div>
+            <p className="text-[10px] font-black text-vdas-orange uppercase tracking-widest mb-2">Registered Address</p>
+            <p className="text-slate-900 font-black">102, Business Square, Andheri West, Mumbai 400053</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>Level 2: SEBI SCORES Portal</h2>
+      <p>If the grievance is not redressed within 30 days of filing the complaint with us, you may lodge a complaint with SEBI through the SCORES (SEBI Complaints Redress System) portal.</p>
+      <p>SCORES facilitates you to lodge your complaint online with SEBI and subsequently view its status. The platform ensures a transparent and structured resolution process monitored by the regulator.</p>
+      <div className="flex flex-wrap gap-4 mt-8">
+        <a href="https://scores.gov.in/scores/Welcome.html" target="_blank" rel="noopener noreferrer" 
+           className="inline-flex items-center gap-3 bg-vdas-blue text-white px-8 py-4 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-vdas-orange transition-all shadow-lg shadow-vdas-blue/20">
+          Lodge Complaint on SCORES
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+        </a>
+        <a href="https://smartodr.in/login" target="_blank" rel="noopener noreferrer" 
+           className="inline-flex items-center gap-3 border-2 border-slate-200 text-slate-700 px-8 py-4 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all">
+          Online Dispute Resolution (SMART ODR)
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+        </a>
+      </div>
+
+      <div className="mt-16 p-8 border border-slate-100 rounded-[2.5rem] bg-slate-50/50">
+        <h3 className="text-lg font-black text-slate-900 mb-4">Mandatory Disclosures</h3>
+        <p className="text-sm text-slate-500 leading-relaxed font-medium">
+          Filing of a complaint on SCORES is a prerequisite for initiating a complaint on the SMART ODR portal. Investor may lodge a complaint on SCORES within 3 years from the date of cause of action.
+        </p>
+      </div>
+    </LegalPage>
+  )
+}
