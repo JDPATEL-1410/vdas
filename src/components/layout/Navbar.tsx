@@ -97,7 +97,16 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
 
             {/* Logo */}
-            <Link to="/" className="flex items-center group relative z-10 py-2">
+            <Link 
+              to="/" 
+              onClick={(e) => {
+                if (location.pathname === '/') {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+              className="flex items-center group relative z-10 py-2"
+            >
               <motion.img 
                 animate={{ height: scrolled ? 50 : 65 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
