@@ -8,6 +8,7 @@ interface LegalPageProps {
   seoTitle: string; 
   lastUpdated: string; 
   image: string;
+  description?: string;
   children: React.ReactNode 
 }
 
@@ -18,7 +19,7 @@ export function LegalPage({ title, seoTitle, lastUpdated, image, children }: Leg
       
       <PageHero 
         title={title}
-        description={`Version 2.2 • Last Modified ${lastUpdated}`}
+        description={description || `Version 2.2 • Last Modified ${lastUpdated}`}
         image={image}
         breadcrumbs={[{ label: 'Legal', to: '/legal' }, { label: title }]}
         badge="Institutional Compliance"
@@ -169,7 +170,13 @@ export function CommissionDisclosure() {
 
 export function GrievanceRedressal() {
   return (
-    <LegalPage title="Grievance Redressal" seoTitle="Grievance & SCORES" lastUpdated="May 16, 2026" image="/legal_grievance_header.png">
+    <LegalPage 
+      title="Grievance Redressal" 
+      seoTitle="Grievance & SCORES" 
+      lastUpdated="May 16, 2026" 
+      image="/legal_grievance_header.png"
+      description="Ensuring absolute transparency and systematic investor protection through SEBI mandated resolution frameworks."
+    >
       <div className="p-10 bg-vdas-blue/5 border-l-8 border-vdas-orange rounded-3xl mb-12 shadow-sm">
         <p className="text-2xl font-black text-vdas-blue-dark mb-3">Investor Grievance Policy</p>
         <p className="text-slate-600 font-medium leading-relaxed">At VDAS Financial, we are committed to providing a transparent and efficient mechanism for the resolution of investor grievances in accordance with SEBI regulations.</p>
